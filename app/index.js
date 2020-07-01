@@ -1,8 +1,36 @@
 import './index.css'
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-console.log('"Wrong number,"\nsaid a familiar voice.')
+import Counter from './components/Counter'
+import Notification from './components/Notification'
 
-const otsikko = document.createElement('h2')
-otsikko.innerText = 'The fool didn\'t know it was impossible,\nso he did it.'
+import { createStore, combineReducers } from 'redux'
 
-document.body.appendChild(otsikko)
+import CounterReducer from './reducers/CounterReducer'
+import NotificationReducer from './reducers/NotificationReducer'
+
+const reducers = combineReducers({
+    Counter: CounterReducer,
+    Notification: NotificationReducer
+})
+
+
+const sailioMME = createStore(reducers) // initialized to 0
+
+
+const App = ({ store }) => (
+  <div>
+    <p>The fool didn't know it was impossible, &nbsp;so he did it.</p>
+    <Counter count={ store.getState().Counter  } dispatcher={store.dispatch} />
+    <Notification notification={ store.getState().Notification }></Notification>
+  </div>
+
+
+)
+
+const renderointi = () => ReactDOM.render(<App store={sailioMME} />, document.getElementById('root'))
+
+sailioMME.subscribe(renderointi)
+
+renderointi()

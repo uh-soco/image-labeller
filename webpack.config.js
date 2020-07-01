@@ -4,7 +4,7 @@ const child = require('child_process')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const config = {
-  entry: './app/index.js',
+  entry: ['@babel/polyfill', './app/index.js'],
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'tuotantobundleMME.js'
@@ -20,7 +20,7 @@ const config = {
         stdio: 'inherit'
       }).on('close', code => process.exit(code))
     
-  }
+    }
 
 
 
@@ -31,9 +31,16 @@ const config = {
         test: /\.css$/,
         loaders: ['style-loader', 'css-loader'],
       },
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        query: {
+          presets: ['@babel/preset-react', '@babel/preset-env']
+        }
+    }
     ],
   },
-  plugins: [new HtmlWebpackPlugin()]
+  plugins: [new HtmlWebpackPlugin({   template: './app/app.html'  })]
 }
 
 module.exports = config
