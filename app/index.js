@@ -21,12 +21,10 @@ const sailioMME = createStore(reducers) // initialized to 0
 
 const App = ({ store }) => (
   <div>
-    <p>The fool didn't know it was impossible, &nbsp;so he did it.</p>
-    <Counter count={ store.getState().Counter  } dispatcher={store.dispatch} />
     <Notification notification={ store.getState().Notification }></Notification>
+    <Counter count={ store.getState().Counter  } dispatcher={store.dispatch} />
+    <p>The fool didn't know it was impossible, &nbsp;so he did it.</p>
   </div>
-
-
 )
 
 const renderointi = () => ReactDOM.render(<App store={sailioMME} />, document.getElementById('root'))

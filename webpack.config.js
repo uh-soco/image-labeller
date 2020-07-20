@@ -4,11 +4,17 @@ const child = require('child_process')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const config = {
-  entry: ['@babel/polyfill', './app/index.js'],
+  entry: {
+    sovellukseMME: ['@babel/polyfill', './app/index.js'],
+  },
+
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: 'tuotantobundleMME.js'
+
+    /*** https://webpack.js.org/configuration/output/#template-strings ***/
+    filename: 'tuotanto[name].js'
   },
+
   devServer: {
     contentBase: path.resolve(__dirname, 'build'),
     compress: true,
@@ -21,26 +27,27 @@ const config = {
       }).on('close', code => process.exit(code))
     
     }
-
-
-
   },
+
   module: {
     rules: [
       {
-        test: /\.css$/,
-        loaders: ['style-loader', 'css-loader'],
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader']
       },
       {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['@babel/preset-react', '@babel/preset-env']
+        test: /\.js$/i,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-react', '@babel/preset-env']
+          }
         }
-    }
+      }
     ],
   },
-  plugins: [new HtmlWebpackPlugin({   template: './app/app.html'  })]
+
+  plugins: [new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'app/app.html') })]
 }
 
 module.exports = config

@@ -8,3 +8,16 @@ h2 {
 	text-transform: uppercase;
 	text-shadow: 0 2px white, 0 3px #777;
 }
+
+button.fancy{
+  border: none;
+  font-family: inherit;
+  cursor: pointer;
+  background-color: #fcba03;
+  color: #fff;
+  border-radius: 0.8em;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.18);
+  padding: 0.25em 0.75em;
+  min-width: 5ch;
+  min-height: 2em;
+}

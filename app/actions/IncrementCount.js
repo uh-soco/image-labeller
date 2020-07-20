@@ -4,6 +4,4 @@ const IncrementCount = () => {
   }
 }
 
-
-
 export default IncrementCount

@@ -19,8 +19,8 @@ const Counter = ({ count, dispatcher })  => {
   return(
     <div>
       <div> { count } </div>
-      <button onClick={handleClick}>nappiMME</button>
-      <button onClick={handleClickMinus}>minus</button>
+      <button className='fancy' onClick={handleClick}>nappiMME</button>
+      <button className='fancy' onClick={handleClickMinus}>minus</button>
     </div>
   )
 
