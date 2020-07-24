@@ -1,34 +1,17 @@
-import './index.css'
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
 
-import Counter from './components/Counter'
-import Notification from './components/Notification'
+import App from './App'
 
-import { createStore, combineReducers } from 'redux'
-
-import CounterReducer from './reducers/CounterReducer'
-import NotificationReducer from './reducers/NotificationReducer'
-
-const reducers = combineReducers({
-    Counter: CounterReducer,
-    Notification: NotificationReducer
-})
+import store from './store'
 
 
-const sailioMME = createStore(reducers) // initialized to 0
 
 
-const App = ({ store }) => (
-  <div>
-    <Notification notification={ store.getState().Notification }></Notification>
-    <Counter count={ store.getState().Counter  } dispatcher={store.dispatch} />
-    <p>The fool didn't know it was impossible, &nbsp;so he did it.</p>
-  </div>
+ReactDOM.render(
+  <Provider store={store}>
+      <App />
+  </Provider>,
+  document.getElementById('root')
 )
-
-const renderointi = () => ReactDOM.render(<App store={sailioMME} />, document.getElementById('root'))
-
-sailioMME.subscribe(renderointi)
-
-renderointi()

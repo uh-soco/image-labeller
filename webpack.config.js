@@ -14,7 +14,7 @@ const config = {
     /*** https://webpack.js.org/configuration/output/#template-strings ***/
     filename: 'tuotanto[name].js'
   },
-
+  devtool: "inline-source-map",
   devServer: {
     contentBase: path.resolve(__dirname, 'build'),
     compress: true,
