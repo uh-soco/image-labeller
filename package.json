@@ -2,19 +2,33 @@
   "name": "osaisipa_confeja",
   "version": "0.0.1",
   "description": "ihan_itse_tein",
+  "author": "duck-duck-tag",
+  "license": "MIT",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server --mode=development",
+    "dev": "NODE_ENV=dev webpack-dev-server --mode=development",
     "build": "webpack --mode=development",
-    "start-electron-dev": "NODE_ENV=dev electron ."
+    "package-linux": "electron-builder --linux"
+  },
+  "build": {
+    "productName": "Siipikarjalautaspohja",
+    "appId": "org.secondArgument.siipikarjalautaspohja",
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "category": "Science"
+    },
+    "directories": {
+      "buildResources": "resources"
+    }
   },
   "keywords": [
     "are_there_ducks?,",
     "whose_AI_are_you?"
   ],
-  "author": "duck-duck-tag",
-  "license": "MIT",
+
   "dependencies": {
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -30,6 +44,7 @@
     "babel-loader": "^8.1.0",
     "css-loader": "^3.6.0",
     "electron": "^9.1.0",
+    "electron-builder": "^22.8.0",
     "electron-devtools-installer": "^3.1.1",
     "electron-react-devtools": "^0.5.3",
     "html-webpack-plugin": "^4.3.0",
