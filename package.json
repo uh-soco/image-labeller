@@ -9,7 +9,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "NODE_ENV=dev webpack-dev-server --mode=development",
     "build": "webpack --mode=development",
-    "package-linux": "electron-builder --linux"
+    "package-linux": "electron-builder build --linux",
+    "package-win": "electron-builder build --win",
+    "package-mac": "electron-builder build --mac"
   },
   "build": {
     "productName": "Siipikarjalautaspohja",
@@ -20,6 +22,34 @@
       ],
       "category": "Science"
     },
+
+    "dmg": {
+      "contents": [
+        {
+          "x": 130,
+          "y": 220
+        },
+        {
+          "x": 410,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": "x64"
+        },
+        {
+          "target": "msi",
+          "arch": "x64"
+        }
+      ]
+    },
+
     "directories": {
       "buildResources": "resources"
     }
