@@ -6,12 +6,12 @@
   "license": "MIT",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "NODE_ENV=dev webpack-dev-server --mode=development",
     "build": "webpack --mode=development",
     "package-linux": "electron-builder build --linux",
     "package-win": "electron-builder build --win",
-    "package-mac": "electron-builder build --mac"
+    "package-mac": "electron-builder build --mac",
+    "test": "jest"
   },
   "build": {
     "productName": "Siipikarjalautaspohja",
@@ -22,7 +22,6 @@
       ],
       "category": "Science"
     },
-
     "dmg": {
       "contents": [
         {
@@ -49,7 +48,6 @@
         }
       ]
     },
-
     "directories": {
       "buildResources": "resources"
     }
@@ -58,8 +56,27 @@
     "are_there_ducks?,",
     "whose_AI_are_you?"
   ],
-
+  "jest": {
+    "projects": [
+      {
+        "displayName": "dummytesting",
+        "moduleNameMapper": {
+          "\\.(css)$": "identity-obj-proxy"
+        },
+        "moduleFileExtensions": [
+          "js",
+          "jsx",
+          "json"
+        ],
+        "moduleDirectories": [
+          "node_modules",
+          "app/node_modules"
+        ]
+      }
+    ]
+  },
   "dependencies": {
+    "@babel/preset-react": "^7.10.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
@@ -70,14 +87,18 @@
     "@babel/core": "^7.10.5",
     "@babel/polyfill": "^7.10.4",
     "@babel/preset-env": "^7.10.4",
-    "@babel/preset-react": "^7.10.4",
+    "babel-jest": "^26.2.2",
     "babel-loader": "^8.1.0",
     "css-loader": "^3.6.0",
     "electron": "^9.1.0",
     "electron-builder": "^22.8.0",
     "electron-devtools-installer": "^3.1.1",
     "electron-react-devtools": "^0.5.3",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
     "html-webpack-plugin": "^4.3.0",
+    "jest": "^26.2.2",
+    "react-test-renderer": "^16.13.1",
     "redux-devtools-extension": "^2.13.8",
     "style-loader": "^1.2.1",
     "webpack": "^5.0.0-beta.22",

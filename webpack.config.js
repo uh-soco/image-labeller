@@ -46,6 +46,7 @@ const config = {
       }
     ],
   },
+  
 
   plugins: [new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'app/app.html') })]
 }
