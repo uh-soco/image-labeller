@@ -1,19 +1,27 @@
+
 import React from 'react'
-import Enzyme, { shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16'
+import '@testing-library/jest-dom'
+import { render } from '@testing-library/react'
 import Notification from '../../app/components/Notification'
 
 
-Enzyme.configure({ adapter: new Adapter() })
+it('should create a component including a header', () => {
 
-describe('<Notification />', () => {
+  const component = render(<Notification notification='Notifikaatio'/>)
 
-  it('should have a header', () => {
+  const header =  component.container.querySelector('h2')
 
-    const wrapper = shallow(<Notification notification='testi'/>)
+  expect( header ).toBeTruthy()
 
-    expect(wrapper.find('h2').getElements().length).toBe(1)
+})  
 
-  });
+it('should display the specified notification', () => {
 
-})
+
+  const testNotification = 'Notifikaatio'
+
+  const component = render(<Notification notification={testNotification}/>)
+
+  expect( component.container ).toHaveTextContent(testNotification)
+
+})  
