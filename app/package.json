@@ -1,0 +1,14 @@
+{
+  "name": "osaisipa_confeja",
+  "version": "0.0.1",
+  "description": "ihan_itse_tein",
+  "author": "duck-duck-tag",
+  "license": "MIT",
+  "main": "main.js",
+  "scripts": {
+    "postinstall": "../node_modules/.bin/electron-rebuild --parallel --force --types prod,dev --module-dir ."
+  },
+  "dependencies": {
+    "better-sqlite3": "^7.1.0"
+  }
+}
