@@ -9,14 +9,14 @@ const config = {
   },
 
   output: {
-    path: path.resolve(__dirname, 'build'),
+    path: path.resolve(__dirname, 'app', 'build'),
 
     /*** https://webpack.js.org/configuration/output/#template-strings ***/
     filename: 'tuotanto[name].js'
   },
   devtool: "inline-source-map",
   devServer: {
-    contentBase: path.resolve(__dirname, 'build'),
+    contentBase: path.resolve(__dirname, 'app',  'build'),
     compress: true,
     port: 3003,
     before() {

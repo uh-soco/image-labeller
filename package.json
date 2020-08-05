@@ -4,15 +4,16 @@
   "description": "ihan_itse_tein",
   "author": "duck-duck-tag",
   "license": "MIT",
-  "main": "main.js",
+
   "scripts": {
     "dev": "NODE_ENV=dev webpack-dev-server --mode=development",
-    "build": "webpack --mode=development",
-    "package-linux": "npm run postinstall   && electron-builder build --linux",
+    "build": "webpack --mode=production",
+    "electron-rebuild": "electron-rebuild --parallel --force --types prod,dev --module-dir app ",
+    "package-linux": "npm run build && electron-builder build --linux",
     "package-win": "electron-builder build --win",
     "package-mac": "electron-builder build --mac",
-    "test": "jest",
-    "postinstall": "cd ./app && npm run postinstall"
+    "postinstall": "electron-rebuild --install-app-deps",
+    "test": "jest"
   },
   "build": {
     "productName": "Siipikarjalautaspohja",

@@ -6,7 +6,7 @@
   "license": "MIT",
   "main": "main.js",
   "scripts": {
-    "postinstall": "../node_modules/.bin/electron-rebuild --parallel --force --types prod,dev --module-dir ."
+    "electron-rebuild": "../node_modules/.bin/electron-rebuild --parallel --force --types prod,dev --module-dir ."
   },
   "dependencies": {
     "better-sqlite3": "^7.1.0"
