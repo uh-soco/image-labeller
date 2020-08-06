@@ -4,10 +4,9 @@
   "description": "ihan_itse_tein",
   "author": "duck-duck-tag",
   "license": "MIT",
-
   "scripts": {
     "dev": "NODE_ENV=dev webpack-dev-server --mode=development",
-    "build": "webpack --mode=production",
+    "build": "webpack --mode=development",
     "electron-rebuild": "electron-rebuild --parallel --force --types prod,dev --module-dir app ",
     "package-linux": "npm run build && electron-builder build --linux",
     "package-win": "electron-builder build --win",
@@ -61,7 +60,19 @@
   "jest": {
     "projects": [
       {
-        "displayName": "dummytesting",
+        "displayName": "jest-electron-runner tests",
+        "runner": "@jest-runner/electron/main",
+        "testEnvironment": "node",
+        "testMatch": ["<rootDir>/tests/native/exportResults.native.test.js"],
+        "moduleDirectories": [
+          "node_modules",
+          "app/node_modules"
+        ]
+      },
+
+      {
+        "displayName": "non-native tests",
+        "testPathIgnorePatterns": ["/node_modules/","/native/"],
         "moduleNameMapper": {
           "\\.(css)$": "identity-obj-proxy"
         },
@@ -69,16 +80,11 @@
           "js",
           "jsx",
           "json"
-        ],
-        "moduleDirectories": [
-          "node_modules",
-          "app/node_modules"
         ]
       }
     ]
   },
   "dependencies": {
-    "@babel/preset-react": "^7.10.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
@@ -89,6 +95,8 @@
     "@babel/core": "^7.10.5",
     "@babel/polyfill": "^7.10.4",
     "@babel/preset-env": "^7.10.4",
+    "@babel/preset-react": "^7.10.4",
+    "@jest-runner/electron": "^3.0.0",
     "@testing-library/jest-dom": "^5.11.2",
     "@testing-library/react": "^10.4.7",
     "babel-jest": "^26.2.2",
@@ -100,6 +108,7 @@
     "electron-react-devtools": "^0.5.3",
     "electron-rebuild": "^1.11.0",
     "html-webpack-plugin": "^4.3.0",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^26.2.2",
     "react-test-renderer": "^16.13.1",
     "redux-devtools-extension": "^2.13.8",

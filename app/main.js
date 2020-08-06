@@ -1,4 +1,6 @@
-const { BrowserWindow, app } = require('electron')
+const { BrowserWindow, app, ipcMain } = require('electron')
+const writeResultsToSQLite = require('./utils/writeResultsToSQLite')
+
 
 const installExtensions = async () => {
   const { default: installExtension, REDUX_DEVTOOLS } = require('electron-devtools-installer');
@@ -37,3 +39,11 @@ app.on('ready', () => {
   createWindow() // Chrome-kehitystyokalutMME
     //win.webContents.openDevTools()  )
 })
+
+
+
+
+// Listener for request to export dat to sqlite
+ipcMain.on('request-write-to-sqlite', (event, arg) => {
+  writeResultsToSQLite(arg)
+});

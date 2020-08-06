@@ -20,7 +20,7 @@ const config = {
     compress: true,
     port: 3003,
     before() {
-      child.spawn(  'NODE_ENV='.concat(process.env.NODE_ENV), ['PORT=3003', 'electron .', ], {
+      child.spawn(  'NODE_ENV='.concat(process.env.NODE_ENV), ['PORT=3003', 'electron app/.', ], {
         shell: true,
         env: process.env,
         stdio: 'inherit'
