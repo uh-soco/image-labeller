@@ -6,6 +6,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "NODE_ENV=dev webpack-dev-server --mode=development",
+    "dev1": "NODE_ENV=foo webpack-dev-server --mode=development",
     "build": "webpack --mode=development",
     "electron-rebuild": "electron-rebuild --parallel --force --types prod,dev --module-dir app ",
     "package-linux": "npm run build && electron-builder build --linux",
@@ -63,16 +64,20 @@
         "displayName": "jest-electron-runner tests",
         "runner": "@jest-runner/electron/main",
         "testEnvironment": "node",
-        "testMatch": ["<rootDir>/tests/native/exportResults.native.test.js"],
+        "testMatch": [
+          "<rootDir>/tests/native/exportResults.native.test.js"
+        ],
         "moduleDirectories": [
           "node_modules",
           "app/node_modules"
         ]
       },
-
       {
         "displayName": "non-native tests",
-        "testPathIgnorePatterns": ["/node_modules/","/native/"],
+        "testPathIgnorePatterns": [
+          "/node_modules/",
+          "/native/"
+        ],
         "moduleNameMapper": {
           "\\.(css)$": "identity-obj-proxy"
         },
@@ -88,6 +93,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
+    "react-router-dom": "^5.2.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0"
   },

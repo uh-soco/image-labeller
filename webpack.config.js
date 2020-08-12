@@ -19,6 +19,7 @@ const config = {
     contentBase: path.resolve(__dirname, 'app',  'build'),
     compress: true,
     port: 3003,
+    
     before() {
       child.spawn(  'NODE_ENV='.concat(process.env.NODE_ENV), ['PORT=3003', 'electron app/.', ], {
         shell: true,
@@ -36,7 +37,7 @@ const config = {
         use: ['style-loader', 'css-loader']
       },
       {
-        test: /\.js$/i,
+        test: /\.(js|jsx)$/i,
         use: {
           loader: 'babel-loader',
           options: {
@@ -46,7 +47,6 @@ const config = {
       }
     ],
   },
-  
 
   plugins: [new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'app/app.html') })]
 }

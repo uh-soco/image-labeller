@@ -5,8 +5,8 @@ const sendResultsToMainForWritingToSQLite = (result,filename) => {
 
   // Data to send to main process
   const data = {
-      result: result,
-      filename: filename
+    result: result,
+    filename: filename
   };
 
   console.log('sending this to main process' , data)
@@ -38,9 +38,9 @@ const exportResults = (job, formatToExportTo, file='export') => {
 
   if (formatToExportTo === 'SQLite') {
 
-      sendResultsToMainForWritingToSQLite(job.result,filename)
+    sendResultsToMainForWritingToSQLite(job.result,filename)
 
-      return
+    return
   } 
   
   const rows = formatToExportTo === 'CSV' ? job.result.map(makeRowForCSV) : createJSON(job.result)
