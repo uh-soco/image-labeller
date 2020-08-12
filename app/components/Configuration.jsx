@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import routes from '../constants/routes.json';
-import services from '../constants/services.json';
-import styles from './Configuration.css';
+import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import routes from '../constants/routes.json'
+import services from '../constants/services.json'
+import styles from './Configuration.css'
 
 
-const Configuration = ( props ) => {
+const Configuration = (  ) => {
 
   return(
     <div>
-      konfiguraatio
+      <Link to={routes.HOME}>Home</Link>
+      <p>konfiguraatio</p>
     </div>
   )
   /*

@@ -19,6 +19,7 @@ const config = {
     contentBase: path.resolve(__dirname, 'app',  'build'),
     compress: true,
     port: 3003,
+    historyApiFallback: true,
     
     before() {
       child.spawn(  'NODE_ENV='.concat(process.env.NODE_ENV), ['PORT=3003', 'electron app/.', ], {

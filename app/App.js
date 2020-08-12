@@ -1,18 +1,21 @@
 import './index.css'
 import React from 'react'
-import { Switch, Route, Link } from 'react-router-dom';
-import routes from './constants/routes.json'
 
-//import { useSelector } from  'react-redux'
+import { Switch, Route, BrowserRouter as Router, Link } from 'react-router-dom'
+import routes from './constants/routes.json'
+import Home from './components/Home.jsx'
+import Configuration from './components/Configuration.jsx'
 
 const App = () =>  {
   
 
     return(
-        <div>
-        <p>The fool didn't know it was impossible, &nbsp;so he did it.</p>
-        <Link to={routes.CONFIGURATION}>Configure services</Link>
-        </div>
+        <Router>
+            <Switch>     
+                <Route path={routes.CONFIGURATION} component={Configuration} />         
+                <Route path={routes.HOME} component={Home} />            
+            </Switch>
+        </Router> 
     )
 }
 
