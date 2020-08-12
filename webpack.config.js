@@ -47,9 +47,12 @@ const config = {
         }
       }
     ],
-  },
+  }
+  ,resolve: {
+    extensions: ['.js','.jsx']
+  }
 
-  plugins: [new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'app/app.html') })]
+  ,plugins: [new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'app/app.html') })]
 }
 
 module.exports = config
