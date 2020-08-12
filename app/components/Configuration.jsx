@@ -4,16 +4,14 @@ import routes from '../constants/routes.json'
 import services from '../constants/services.json'
 import styles from './Configuration.css'
 
+import { useSelector, useDispatch } from  'react-redux'
+import setConfiguration from '../actions/setConfiguration'
 
 const Configuration = (  ) => {
 
-  return(
-    <div>
-      <Link to={routes.HOME}>Home</Link>
-      <p>konfiguraatio</p>
-    </div>
-  )
-  /*
+
+ 
+  
   const [SERVICE, setSERVICE] = useState('')
 
   useEffect(() => {
@@ -25,13 +23,14 @@ const Configuration = (  ) => {
     return ''
   }
 
+  const dispatch       = useDispatch()
 
-  const addConfiguration = props.addConfiguration
-
-  const configuration = props.configuration[SERVICE]
+  const configurations  = useSelector(state => state.Configuration) // Holds store (= all configurations)
+  const configuration   = configurations[SERVICE]                   // Holds selected configuration
 
 
   const handleConfigChange = (e,which) => {
+    
     let alteredConfig = { ...configuration }
 
     alteredConfig.options = alteredConfig.options.map( opt => {
@@ -39,7 +38,8 @@ const Configuration = (  ) => {
       return opt
     })
    
-    addConfiguration(alteredConfig)
+    dispatch( setConfiguration(alteredConfig) )
+    
   }
 
 
@@ -55,6 +55,7 @@ const Configuration = (  ) => {
         
       <Link to={routes.HOME}>
         <i className="fa fa-arrow-left fa-3x" />
+        <p>HOME</p>
       </Link>
       <br></br>
       {
@@ -96,7 +97,9 @@ const Configuration = (  ) => {
     </div>
           
   )
-  */
+  
+
+  
 }
 
 export default Configuration
