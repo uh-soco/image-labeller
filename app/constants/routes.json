@@ -1,5 +1,8 @@
 {
   "HOME": "/",
   "IMAGE": "/image",
-  "CONFIGURATION": "/configuration"
+  "CONFIGURATION": "/configuration",
+  "IMAGESETUP": "/imagesetup",
+  "SERVICESETUP": "/servicesetup",
+  "RESULTS": "/results"
 }

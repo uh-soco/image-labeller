@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import routes from '../constants/routes.json'
 import services from '../constants/services.json'
 
-import Input from './Input'
+import Input from '../components/Input'
 
 import { useSelector, useDispatch } from  'react-redux'
 import setConfiguration from '../actions/setConfiguration'
@@ -55,12 +53,7 @@ const Configuration = (  ) => {
 
   return(
     <Container>
-      <Row>
-        <Link to={routes.HOME}>
-          <i className="fa fa-arrow-left fa-3x">HOME</i>
-          
-        </Link>
-      </Row>
+      
       <Row>
         
         {

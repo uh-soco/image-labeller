@@ -3,21 +3,29 @@ import React from 'react'
 
 import { Switch, Route, BrowserRouter as Router, Link } from 'react-router-dom'
 import routes from './constants/routes.json'
-import Home from './components/Home'
+import Home from './containers/Home'
 
-import Configuration from './components/Configuration.jsx'
+import Configuration from './containers/Configuration'
+import SetupImages   from './containers/SetupImages'
+import SetupServices from './containers/SetupServices'
+import Results       from './containers/SetupImages'
+import Menu          from './containers/Menu'
 
 const App = () =>  {
   
 
-    return(
-        <Router>
-            <Switch>     
-                <Route path={routes.CONFIGURATION} component={Configuration} />         
-                <Route path={routes.HOME} component={Home} />            
-            </Switch>
-        </Router> 
-    )
+  return(
+    <Router>
+      <Menu/>
+      <Switch>     
+          <Route path={routes.CONFIGURATION} component={Configuration} />
+          <Route path={routes.IMAGESETUP} component={SetupImages} />
+          <Route path={routes.SERVICESETUP} component={SetupServices} />
+          <Route path={routes.Results} component={Results} />
+          <Route path={routes.HOME} component={Home} />            
+      </Switch>
+    </Router> 
+  )
 }
 
 export default App
