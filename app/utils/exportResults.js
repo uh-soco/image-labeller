@@ -1,5 +1,5 @@
 import writeRowsToFile from './writeRowsToFile'
-import { ipcRenderer } from 'electron'
+import { ipcRenderer } from 'electron' // TODO?: use https://www.electronjs.org/docs/api/context-bridge  
 
 const sendResultsToMainForWritingToSQLite = (result,filename) => {
 

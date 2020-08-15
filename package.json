@@ -6,14 +6,14 @@
   "license": "MIT",
   "scripts": {
     "dev": "NODE_ENV=dev webpack-dev-server --mode=development",
-    "build": "webpack --mode=development",
+    "build": "webpack --mode=production",
     "electron-rebuild": "electron-rebuild --parallel --force --types prod,dev --module-dir app ",
     "package-linux": "npm run build && electron-builder build --linux",
     "package-win": "electron-builder build --win",
     "package-mac": "electron-builder build --mac",
     "postinstall": "electron-rebuild --install-app-deps",
     "test": "jest",
-    "start": "electron app/."
+    "start": "electron ./app/main.js"
   },
   "build": {
     "productName": "Siipikarjalautaspohja",
@@ -96,7 +96,8 @@
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",
     "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "uuid": "^8.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.10.5",

@@ -7,6 +7,7 @@ const config = {
   entry: {
     sovellukseMME: ['@babel/polyfill', './app/index.js'],
   },
+  target: 'electron-renderer',
 
   output: {
     path: path.resolve(__dirname, 'app', 'build'),

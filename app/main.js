@@ -1,6 +1,8 @@
-const { BrowserWindow, app, ipcMain } = require('electron')
+const { BrowserWindow, app, ipcMain, remote } = require('electron')
 const writeResultsToSQLite = require('./utils/writeResultsToSQLite')
+const getPathsFromTxt      = require('./utils/getPathsFromTxt')
 
+const path = require('path')
 
 const installExtensions = async () => {
   const { default: installExtension, REDUX_DEVTOOLS } = require('electron-devtools-installer');
@@ -18,7 +20,14 @@ const createWindow = async () => {
 
   let win = new BrowserWindow({
         width: 1200,
-        height: 600
+        height: 600,
+        webPreferences: {   
+          nodeIntegration: false,
+          contextIsolation: true,
+          enableRemoteModule: false,
+          preload: path.join(__dirname, "preload.js")
+        }
+      
     })
     
   if (process.env.NODE_ENV === 'dev') {
@@ -40,7 +49,15 @@ app.on('ready', () => {
     //win.webContents.openDevTools()  )
 })
 
+// Listener for reading file 
+ipcMain.handle('read-file-content', (event,arg) => {
 
+  console.log('args',arg)
+  return getPathsFromTxt(arg)
+  
+
+  
+});
 
 
 // Listener for request to export dat to sqlite

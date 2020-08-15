@@ -17,8 +17,12 @@ const Menu = () => {
 
   }
 
+  const menuStyle = {
+    marginBottom: '2%'
+  }
+
   return(
-    <Navbar bg="primary" variant="dark">
+    <Navbar style={menuStyle} bg="primary" variant="dark">
       
       <Nav className="mr-auto">
         <ButtonGroup>
