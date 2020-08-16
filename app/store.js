@@ -5,7 +5,7 @@ import CounterReducer from './reducers/CounterReducer'
 import NotificationReducer from './reducers/NotificationReducer'
 import ConfigurationReducer from './reducers/ConfigurationReducer'
 import PathlistReducer from './reducers/PathlistReducer'
-
+import ServicesToSendToReducer from './reducers/ServicesToSendToReducer'
 
 import { composeWithDevTools  } from 'redux-devtools-extension'
 
@@ -13,7 +13,8 @@ const reducers = combineReducers({
     Counter: CounterReducer,
     Notification: NotificationReducer,
     Configuration: ConfigurationReducer,
-    Pathlist: PathlistReducer
+    Pathlist: PathlistReducer,
+    ServicesToSendTo: ServicesToSendToReducer
 })
 
 

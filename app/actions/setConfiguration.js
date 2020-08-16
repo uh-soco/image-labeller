@@ -2,7 +2,7 @@
 const setConfiguration = configurationData => {
 
   return {
-        type: 'SET',
+        type: 'SET_CONFIGURATION',
         data:  configurationData 
   }
   

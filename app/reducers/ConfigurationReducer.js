@@ -23,7 +23,7 @@ const configuration = (state = servicesArrayToConfigObject(services) ,action) =>
 
   switch (action.type) {
   
-    case 'SET':
+    case 'SET_CONFIGURATION':
       alteredState = { ...state }
       alteredState[action.data.name] = action.data
       return alteredState

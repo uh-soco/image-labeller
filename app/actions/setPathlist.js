@@ -2,7 +2,7 @@
 const setPathlist = list => {
 
     return {
-        type: "SET",
+        type: "SET_PATHLIST",
         data: list
     }
 

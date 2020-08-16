@@ -12,7 +12,9 @@ const SetupImages = () => {
   const pathlist = useSelector(state => state.Pathlist)
   const dispatch     = useDispatch()
 
-  const [imageURL, setImageURL] = useState('https://picsum.photos/id/256/200/200.jpg') 
+
+  const placeholder = 'https://picsum.photos/id/256/200/200.jpg'
+  const [imageURL, setImageURL] = useState(placeholder) 
 
   const handlePathlistChange = list => {
     console.log('changed to',list)
@@ -72,7 +74,7 @@ const SetupImages = () => {
                   </Card.Header>
                   <Accordion.Collapse eventKey="0">
                     <Card.Body>
-                    <Input name={'URL for image to tag'} placeholder={'http://domain.com/image.jpg'} onChange={handleURLchange} />
+                    <Input name={'URL for image to tag'} placeholder={'https://picsum.photos/id/256/200/200.jpg'} onChange={handleURLchange} />
                     <Button variant={buttonVariant} onClick={handleClickURL}>Add to list</Button>
                     </Card.Body>
                   </Accordion.Collapse>
