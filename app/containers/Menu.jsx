@@ -22,7 +22,7 @@ const Menu = () => {
   }
 
   return(
-    <Navbar style={menuStyle} bg="primary" variant="dark">
+    <Navbar style={menuStyle} bg="primary" variant="light">
       
       <Nav className="mr-auto">
         <ButtonGroup>

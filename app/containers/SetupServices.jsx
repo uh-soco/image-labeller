@@ -3,13 +3,15 @@ import services from '../constants/services.json'
 import { useSelector, useDispatch  } from 'react-redux'
 import { Container, Form, Button } from 'react-bootstrap'
 import setServicesToSendTo from '../actions/setServicesToSendTo'
-
+import sendImages from '../utils/sendImages'
 
 const SetupServices = () => {
 
 
-  const pathlist = useSelector(state => state.Pathlist)
-  const ServicesToSendTo = useSelector(state => state.ServicesToSendTo)
+  const pathlist          = useSelector(state => state.Pathlist)
+  const configuration     = useSelector(state => state.Configuration)
+  const ServicesToSendTo  = useSelector(state => state.ServicesToSendTo)
+
   const dispatch = useDispatch()
 
   const handleSelection = name => {
@@ -22,6 +24,17 @@ const SetupServices = () => {
 
   const styles = {
     fontSize: '120%'
+  }
+
+
+  const doAnalyze = () => {
+
+    const imagetags = sendImages(pathlist,ServicesToSendTo,configuration).then(res => {
+      console.log('res',res)
+      return res
+    })
+
+    console.log('imagetags', imagetags)
   }
 
   return(
@@ -53,6 +66,7 @@ const SetupServices = () => {
       <Button
         variant="success"
         disabled={ServicesToSendTo.length === 0}
+        onClick={doAnalyze}
         >
         Analyze {pathlist.length} images using {ServicesToSendTo.length} services
       </Button>
