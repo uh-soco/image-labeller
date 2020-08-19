@@ -5,10 +5,13 @@ import { Container, Form, Button } from 'react-bootstrap'
 import setServicesToSendTo from '../actions/setServicesToSendTo'
 import sendImages from '../utils/sendImages'
 
+import setJob from '../actions/setJob'
+
 const SetupServices = () => {
 
 
   const pathlist          = useSelector(state => state.Pathlist)
+  const job               = useSelector(state => state.Job)
   const configuration     = useSelector(state => state.Configuration)
   const ServicesToSendTo  = useSelector(state => state.ServicesToSendTo)
 
@@ -27,14 +30,25 @@ const SetupServices = () => {
   }
 
 
+  const handleJobChange = result => {
+        
+    const newJob = {
+        sessionJobID: job.sessionJobID + 1,
+        services: ServicesToSendTo,
+        result: result
+    }
+    
+    dispatch(setJob(newJob))
+}
+
   const doAnalyze = () => {
 
     const imagetags = sendImages(pathlist,ServicesToSendTo,configuration).then(res => {
-      console.log('res',res)
+      handleJobChange(res)
       return res
     })
 
-    console.log('imagetags', imagetags)
+    
   }
 
   return(

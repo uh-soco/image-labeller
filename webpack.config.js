@@ -20,8 +20,17 @@ const config = {
     contentBase: path.resolve(__dirname, 'app',  'build'),
     compress: true,
     port: 3003,
+    hot: true,
     historyApiFallback: true,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+      "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
+    },
     
+    proxy: {
+      '/tag': 'http://localhost:3001'
+    },    
     before() {
       child.spawn(  'NODE_ENV='.concat(process.env.NODE_ENV), ['PORT=3003', 'electron app/.', ], {
         shell: true,
