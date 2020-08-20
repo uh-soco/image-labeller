@@ -1,9 +1,13 @@
-import React from 'react'
-import { Link, withRouter } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import routes from '../constants/routes.json'
-import { Navbar,  Nav, Button, ButtonGroup, DropdownButton, Dropdown  } from 'react-bootstrap'
+import { Navbar,  Nav, Button, ButtonGroup,  ButtonToolbar  } from 'react-bootstrap'
 
 const Menu = () => {
+
+  const [view,setView] = useState() // Holds path on current URL. Only for the purposes of showing which page we're on.
+
+  useEffect(() => setView(window.location.pathname),[])
 
   const navBarLinkStyle = {
     color: 'white',
@@ -11,42 +15,46 @@ const Menu = () => {
 
   }
 
-  const dropdownLinkStyle = {
-    color: 'black',
-    textDecoration: 'none' // Remove underline from links
-
-  }
 
   const menuStyle = {
     marginBottom: '2%'
   }
 
+  
+
+  let menuButtons = [
+    { route: routes.HOME          ,text: 'Home'  },
+    { route: routes.CONFIGURATION ,text: 'Configure services'  },
+    { route: routes.IMAGESETUP    ,text: '1. Setup images for analysis'  },
+    { route: routes.SERVICESETUP  ,text: '2. Setup services' },
+    { route: routes.RESULTS       ,text: '3. Results' }
+
+  ]
+
+
+
   return(
     <Navbar style={menuStyle} bg="primary" variant="light">
       
-      <Nav className="mr-auto">
-        <ButtonGroup>
-        
-          <Button variant='success'><Link style={navBarLinkStyle} to={routes.HOME}>Home</Link></Button>
-        
-        
-          <Button variant='success'><Link style={navBarLinkStyle} to={routes.CONFIGURATION}>Configure services </Link></Button>
+          <ButtonGroup>
+            {
+              menuButtons.map(b => {
 
-          <DropdownButton variant='success' as={ButtonGroup} title="Analyze" id="bg-vertical-dropdown-3">
-            <Dropdown.Item as='div' eventKey="1">
-              <Link style={dropdownLinkStyle} to={routes.IMAGESETUP}>1. Setup images for analysis</Link>              
-            </Dropdown.Item>
-            <Dropdown.Item as='div' eventKey="2">
-              <Link style={dropdownLinkStyle} to={routes.SERVICESETUP}>2. Setup services</Link>              
-            </Dropdown.Item>
-            <Dropdown.Item as='div' eventKey="3">
-              <Link style={dropdownLinkStyle} to={routes.RESULTS}>3. Results</Link>              
-            </Dropdown.Item>
-          </DropdownButton>
-       
-        </ButtonGroup>
-      </Nav>
-      
+                const variant = b.route === view ? 'warning' : 'success'
+                
+                return(
+                  <Button
+                    key={b.text}
+                    variant={variant}
+                    onClick={() => setView(b.route)}
+                  >
+                    <Link style={navBarLinkStyle} to={b.route}>{ b.text }</Link>              
+                  </Button>
+                )
+              })
+            }
+          
+          </ButtonGroup>
     </Navbar>
   )
     

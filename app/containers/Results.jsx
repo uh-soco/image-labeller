@@ -4,7 +4,7 @@ import ResultCrosstabulation from '../components/ResultCrosstabulation'
 
 import { useSelector  } from 'react-redux'
 
-
+import { Container } from 'react-bootstrap'
   
 const Results = () => {
 
@@ -15,11 +15,11 @@ const Results = () => {
     }
 
     return(
-        <div>
+        <Container>
         
-        <ResultCrosstabulation job={job} />
+            <ResultCrosstabulation job={job} />
         
-        </div>
+        </Container>
     )
 }
 
