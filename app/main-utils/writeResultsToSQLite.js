@@ -1,4 +1,5 @@
 const Database = require('better-sqlite3')
+const getTimestamp = require('../utils/getTimestamp')
 
 const writeResultsToSQLite = arg => {
 
@@ -7,7 +8,7 @@ const writeResultsToSQLite = arg => {
 
   const insertIntoResultTable = (db,record) => {
 
-    const currentTime = new Date().toISOString().split('T').join(' ')
+    const currentTime = getTimestamp()
     const values = [record.id, record.service, record.label, record.accuracy, record.type, record.path, currentTime]
 
     // Tad less akward way to construct insert statement

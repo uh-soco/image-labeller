@@ -1,34 +1,16 @@
-import writeRowsToFile from './writeRowsToFile'
-import { ipcRenderer } from 'electron' // TODO?: use https://www.electronjs.org/docs/api/context-bridge  
 
-const sendResultsToMainForWritingToSQLite = (result,filename) => {
-
-  // Data to send to main process
-  const data = {
-    result: result,
-    filename: filename
-  };
-
-  console.log('sending this to main process' , data)
-
-  // Main process has listener for action 'request-write-to-sqlite'
-  // listener is in main.dev.ts
-  ipcRenderer.send('request-write-to-sqlite', data);
-}
-
+import getTimestamp from './getTimestamp'
 
 const makeRowForCSV = result => {
-    const ts = new Date()
-    return [result.id, result.service, result.label, result.accuracy,  result.type, result.path, ts].join(';').concat('\n')
+
+    return [result.id, result.service, result.label, result.accuracy,  result.type, result.path, getTimestamp() ].join(';').concat('\n')
 }
 
 const createJSON = result => {
     
-  const json = [JSON.stringify({ 'id': result.id, 'service': result.service, 'label': result.label, 'accuracy': result.accuracy, 'type': result.type, 'path': result.path, ts: new Date() })]
+  const json = [JSON.stringify({ 'id': result.id, 'service': result.service, 'label': result.label, 'accuracy': result.accuracy, 'type': result.type, 'path': result.path, ts: getTimestamp() })]
 
-  //return [JSON.stringify({ 'id': result.id, 'service': result.service, 'label': result.label, 'accuracy': result.accuracy, 'type': result.type, 'path': result.path, ts: new Date() })] // WriteRowsToFile expects an array
-
-  return [JSON.stringify({ result: result, ts: new Date() })] // WriteRowsToFile expects an array
+  return [json] // WriteRowsToFile expects an array
 }
 
 
@@ -36,16 +18,29 @@ const exportResults = (job, formatToExportTo, file='export') => {
 
   const filename = file.concat('.').concat( formatToExportTo === 'SQLite' ? 'db' : formatToExportTo.toLowerCase() )
 
+
+
   if (formatToExportTo === 'SQLite') {
 
-    sendResultsToMainForWritingToSQLite(job.result,filename)
+   
+    // Data to send to main process
+    const data = {
+      result: job.result,
+      filename: filename
+    };
 
-    return
+    // Main process has listener for action 'request-write-to-sqlite'
+    // See preload.js
+    return window.api.sendRowsToBeWrittenToSQLite(data)
+
   } 
   
-  const rows = formatToExportTo === 'CSV' ? job.result.map(makeRowForCSV) : createJSON(job.result)
 
-  writeRowsToFile(rows, filename)
+
+  const rows = formatToExportTo === 'CSV' ? job.result.map(makeRowForCSV) : createJSON(job.result)
+  // see preload.js
+  return window.api.sendRowsToBeWrittenToFile({ rows: rows, filename: filename })
+
 }
 
 export default exportResults

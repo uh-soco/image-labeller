@@ -1,4 +1,5 @@
 { 
+  "sessionJobID": 12345,
   "services": ["Azure","IBM"],
   "result": [
     { "id": "1", "label": "Test", "service": "Azure", "accuracy": 0.52 ,  "type": "localPath", "path": "C:/jalka.jpg" },

@@ -1,8 +1,10 @@
 const { BrowserWindow, app, ipcMain, remote } = require('electron')
-const writeResultsToSQLite = require('./utils/writeResultsToSQLite')
+const writeResultsToSQLite = require('./main-utils/writeResultsToSQLite')
+const writeRowsToFile      = require('./main-utils/writeRowsToFile');
+
 const getPathsFromTxt      = require('./utils/getPathsFromTxt')
 
-const path = require('path')
+const path = require('path');
 
 const installExtensions = async () => {
   const { default: installExtension, REDUX_DEVTOOLS } = require('electron-devtools-installer');
@@ -49,18 +51,20 @@ app.on('ready', () => {
     //win.webContents.openDevTools()  )
 })
 
+/* ------------------------------------- Listeners for preload.js ------------------------- */
+
 // Listener for reading file 
 ipcMain.handle('read-file-content', (event,arg) => {
-
-  console.log('args',arg)
-  return getPathsFromTxt(arg)
-  
-
-  
+  return getPathsFromTxt(arg)  
 });
 
 
 // Listener for request to export dat to sqlite
-ipcMain.on('request-write-to-sqlite', (event, arg) => {
-  writeResultsToSQLite(arg)
+ipcMain.handle('request-write-to-sqlite', (event, arg) => {
+  return writeResultsToSQLite(arg)
+});
+
+// Listener for request to write rows to file
+ipcMain.handle('write-rows-to-file', (event, arg) => {
+  return writeRowsToFile(arg.rows,arg.filename)
 });

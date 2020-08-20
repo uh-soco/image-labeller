@@ -121,8 +121,8 @@ const SetupServices = () => {
           {
             analysisDone ? towardsResultsButton() 
              : <Button
-                variant="success"
-                disabled={ServicesToSendTo.length === 0}
+                variant="primary"
+                disabled={ServicesToSendTo.length === 0 | pathlist.length === 0}
                 onClick={doAnalyze}
                 size="lg"
                 block

@@ -10,8 +10,9 @@ process.once('loaded', () => {
   contextBridge.exposeInMainWorld(
     'api',
     {
-      loadFile: filepath => ipcRenderer.invoke('read-file-content',filepath)
-      
+      loadFile: filepath => ipcRenderer.invoke('read-file-content',filepath),
+      sendRowsToBeWrittenToFile: data => ipcRenderer.invoke('write-rows-to-file', data),
+      sendRowsToBeWrittenToSQLite: data => ipcRenderer.invoke('request-write-to-sqlite',data)
     }
   )
 })

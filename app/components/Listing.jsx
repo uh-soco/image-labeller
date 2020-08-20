@@ -39,15 +39,25 @@ const Listing = ({ onListUpdate, listItems }) => {
     setShowRemoveAllModal(true)
   }
 
+  const tablestyle = {
+    backgroundColor: 'whitesmoke',
+    color: 'black'
+  }
+
+  const rowStyle = {
+    color: 'black'
+  }
+
+
 
   return (
     <div>
-      <Table striped variant="dark" size="sm" responsive="sm">
+      <Table style={tablestyle} size="sm" striped bordered hover>
         <thead>
             <tr>
-                <th className="text-light">Send to service</th>
-                <th className="text-light">Path/url</th>
-                <th className="text-light">Delete</th>
+                <th>Send to service</th>
+                <th>Path/url</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -58,7 +68,7 @@ const Listing = ({ onListUpdate, listItems }) => {
                   // TODO: add id to key
                   <tr key={path.path+idx}>
                       <td><input type='checkbox' checked={path.selected} onChange={() => handleImageSelection(path.path)}></input></td>
-                      <td className="text-light">{path.path}</td>
+                      <td>{path.path}</td>
                       <td>
                           <Button variant='error' id="delete" onClick={() => handleDelete(path.path)}><span>🗑</span></Button>
                       </td>
