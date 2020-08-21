@@ -1,14 +1,15 @@
 import axios from 'axios'
 
-const tagImage = serviceConfiguration => {
+const tagImage = async serviceConfiguration => {
 
     const URL               = serviceConfiguration.getURL()
-    const headers           = serviceConfiguration.getHeaders()
+    const headers           = await serviceConfiguration.getHeaders()
     const handleResponse    = serviceConfiguration.getHandleResponse()
-    const body              = serviceConfiguration.getBody()
+    const body              = await serviceConfiguration.getBody()
     const params            = serviceConfiguration.getParams()
 
-
+    console.log('body',body)
+    
     return axios.post(URL, body, { headers, params: params, paramsSerializer: (params) => {
                 
                 let result = '';
@@ -22,7 +23,7 @@ const tagImage = serviceConfiguration => {
         .catch(err => {
             console.log('Error tagging images:',err)
         })
-
 }
+
 
 export default tagImage

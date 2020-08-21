@@ -138,7 +138,7 @@ const SetupServices = () => {
         <Col/>
         <Col  xs={6}>
           {
-            animation.map(animationtext => <Animation animationtext={animationtext} />)
+            animation.map(animationtext => <Animation key={animationtext} animationtext={animationtext} />)
           }
         </Col>
         <Col/>

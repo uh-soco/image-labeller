@@ -1,10 +1,10 @@
-/*import fs from 'fs'
+const fs = require('fs')
+
 
 // Should probably be async instead
 const getFile = (path) => {
     return fs.readFileSync(path)
 }
-*/
-const getFile = p => p
 
-export default getFile
+
+module.exports = getFile

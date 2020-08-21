@@ -12,7 +12,8 @@ process.once('loaded', () => {
     {
       loadFile: filepath => ipcRenderer.invoke('read-file-content',filepath),
       sendRowsToBeWrittenToFile: data => ipcRenderer.invoke('write-rows-to-file', data),
-      sendRowsToBeWrittenToSQLite: data => ipcRenderer.invoke('request-write-to-sqlite',data)
+      sendRowsToBeWrittenToSQLite: data => ipcRenderer.invoke('request-write-to-sqlite',data),
+      getFile: data => ipcRenderer.invoke('get-file',data)
     }
   )
 })

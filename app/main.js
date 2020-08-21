@@ -1,6 +1,7 @@
 const { BrowserWindow, app, ipcMain, remote } = require('electron')
 const writeResultsToSQLite = require('./main-utils/writeResultsToSQLite')
 const writeRowsToFile      = require('./main-utils/writeRowsToFile');
+const getFile              = require('./main-utils/getFile')
 
 const getPathsFromTxt      = require('./utils/getPathsFromTxt')
 
@@ -67,4 +68,10 @@ ipcMain.handle('request-write-to-sqlite', (event, arg) => {
 // Listener for request to write rows to file
 ipcMain.handle('write-rows-to-file', (event, arg) => {
   return writeRowsToFile(arg.rows,arg.filename)
+});
+
+
+// Listener for request read file
+ipcMain.handle('get-file', (event, arg) => {
+  return getFile(arg)
 });
