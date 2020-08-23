@@ -1,11 +1,12 @@
 
-//import getFile from './getFile'
 
 import getId from '../utils/getId'
 import getSignatureKey from '../utils/getSignatureKey'
 import crypto from 'crypto-js'
 import moment from 'moment'
 import sha256 from 'crypto-js/sha256'
+
+//import jwt from 'jsonwebtoken'
 
 class ServiceConfiguration {
 
@@ -234,14 +235,15 @@ class AWSconfig extends ServiceConfiguration {
         }
 
         if (this.imgPath.type === 'localPath') {
-            const image = Buffer.from(window.api.getFile(this.imgPath.path), 'binary').toString('base64')
+    
+            const image =  window.api.getFileAsBase64(this.imgPath.path)
 
-            body.Image.Bytes = image
+            body.Image.Bytes = await image
 
             return body
 
         } else {
-            const promise = getUrlAsBase64(this.imgPath.path)
+            const promise = window.api.getUrlAsBase64(this.imgPath.path)
             
             const image = await promise
             
@@ -262,7 +264,7 @@ class AWSconfig extends ServiceConfiguration {
 
 
     getURL = () => {
-        return 'https://rekognition.us-east-1.amazonaws.com'
+        return this.API_ENDPOINT
         
     }
     
@@ -287,6 +289,104 @@ class AWSconfig extends ServiceConfiguration {
     }
 }
 
+
+class GoogleConfig extends ServiceConfiguration {
+
+    constructor(configuration, path) {
+        super(configuration, path)
+    }
+
+    getHeaders = () => {
+
+        const iat = Math.floor(Date.now() / 1000)
+        const exp = iat + 3600
+
+
+        const payload = {
+            iss: this.CLIENT_EMAIL,
+            sub: this.CLIENT_EMAIL,
+            aud: 'https://vision.googleapis.com/',
+            iat: iat,
+            exp: exp
+        }
+
+        const parsedPrivateKey = '-----BEGIN PRIVATE KEY-----\n' + this.PRIVATE_KEY.replace(/\s+/g, '\n') + '\n-----END PRIVATE KEY-----'
+
+        const token = jwt.sign(
+            payload
+            , parsedPrivateKey
+            , { algorithm: 'RS256' }
+        )
+
+        return {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        }
+    }
+
+    getBody = () => {
+
+        const body = {
+            requests: [
+                {
+                    image: {
+                        source: {
+                            imageUri: this.imgPath.path
+                        }
+                    },
+                    features: [
+                        {
+                            type: "LABEL_DETECTION",
+                            maxResults: 2147483647
+                        }
+                    ]
+                }
+
+            ]
+        }
+
+
+        if (this.imgPath.type === 'localPath') {
+
+            body.requests[0].image = { content: Buffer.from(getFile(this.imgPath.path), 'binary').toString('base64') }
+
+        }
+
+        return body
+
+
+    }
+
+    getParams = () => {
+    }
+
+
+    getURL = () => {
+        return this.API_ENDPOINT.concat(this.API_URL_QUERY);
+    }
+
+    getHandleResponse = () => {
+
+        const manipulateTag = (tag) => (
+            {
+                path: this.imgPath.path,
+                type: this.imgPath.type,
+                service: this.name,
+                label: tag.description.toLowerCase(),
+                accuracy: tag.score,
+                id: getId(),
+                time: this.getTimestamp(),
+                parents: []
+            }
+        )
+
+        return (response) => {
+            console.log('response', response)
+            return response.data.responses[0].labelAnnotations.map(manipulateTag)
+        }
+    }
+}
+
 export const createQuery = (config,path) => {
 
     let query
@@ -302,6 +402,11 @@ export const createQuery = (config,path) => {
 
     if (config.name === 'AWS') {
         query = new AWSconfig( config, path )
+    }
+
+
+    if (config.name === 'Google') {
+        query = new GoogleConfig(config, path)
     }
     
 
