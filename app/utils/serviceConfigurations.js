@@ -343,8 +343,8 @@ class GoogleConfig extends ServiceConfiguration {
 
 
         if (this.imgPath.type === 'localPath') {
-
-            body.requests[0].image = { content: Buffer.from(getFile(this.imgPath.path), 'binary').toString('base64') }
+            
+            body.requests[0].image = { content: window.api.getFileAsBase64(this.imgPath.path) }
 
         }
 
