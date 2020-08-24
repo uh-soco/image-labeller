@@ -13,7 +13,7 @@
     "package-mac": "electron-builder build --mac",
     "postinstall": "electron-rebuild --install-app-deps",
     "test": "jest",
-    "test-e2e": "NODE_ENV=test testcafe electron:./app ./tests/e2e/Menu.e2e.js",
+    "test-e2e": "NODE_ENV=test testcafe electron:./app ./tests/e2e/Menu.e2e.js ./tests/e2e/TagImages.e2e.js",
     "start": "electron ./app/main.js"
   },
   "build": {
@@ -66,6 +66,7 @@
         "runner": "@jest-runner/electron/main",
         "testEnvironment": "node",
         "testMatch": [
+          
           "<rootDir>/tests/native/exportResults.native.test.js"
         ],
         "moduleDirectories": [

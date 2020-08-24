@@ -283,7 +283,7 @@ class AWSconfig extends ServiceConfiguration {
         }
         
 
-        return (response) => {
+        return response => {
             return response.data.Labels.map(manipulateTag)            
         }
     }
@@ -312,7 +312,14 @@ class GoogleConfig extends ServiceConfiguration {
 
         const parsedPrivateKey = '-----BEGIN PRIVATE KEY-----\n' + this.PRIVATE_KEY.replace(/\s+/g, '\n') + '\n-----END PRIVATE KEY-----'
         
-        const token = await window.api.signJsonWebToken({ payload, parsedPrivateKey})
+        let token
+        // Prevent from trying to sign the token without real data
+        if ( !(['development','test'].find(env => env === process.env.NODE_ENV))  ) {
+
+            token = await window.api.signJsonWebToken({ payload, parsedPrivateKey})
+        }
+
+    
         
         return {
             'Authorization': `Bearer ${token}`,
@@ -376,8 +383,7 @@ class GoogleConfig extends ServiceConfiguration {
             }
         )
 
-        return (response) => {
-            console.log('response', response)
+        return response => {
             return response.data.responses[0].labelAnnotations.map(manipulateTag)
         }
     }

@@ -5,8 +5,12 @@
 import fs from 'fs'
 import exportResults from '../../app/utils/exportResults'
 import dummyJob from '../helpers/dummyjob.json'
-import writeResultsToSQLite from '../../app/utils/writeResultsToSQLite'
+
 import Database from '../../app/node_modules/better-sqlite3'
+import writeRowsToFile from '../../app/main-utils/writeRowsToFile'
+import writeResultsToSQLite from '../../app/main-utils/writeResultsToSQLite'
+
+
 
 
 // All exports are written with this filename
@@ -25,11 +29,15 @@ afterAll(() => {
     return clean()
 });
 
+const exportFunctions = {
+    sendRowsToBeWrittenToFile:   arg => writeRowsToFile(arg.rows,arg.filename),
+    sendRowsToBeWrittenToSQLite: writeResultsToSQLite
+}
 
 
 describe('exporting to CSV', () => {
-        
-    exportResults(dummyJob,'CSV',testFilename)
+
+    const rowsWritten = exportResults(dummyJob,'CSV',testFilename, exportFunctions)
 
     const filename = testFilename.concat('.csv')
 
@@ -60,12 +68,22 @@ describe('exporting to CSV', () => {
         })
 
     })
+
+    test('returns the correct count of rows written', done => {
+        
+        rowsWritten.then(res => {
+            expect(res).toEqual(4)
+            done()
+        })
+       
+
+    })
   
 })
 
 describe('exporting to JSON', () => {
         
-    exportResults(dummyJob,'JSON',testFilename)
+    const rowsWritten = exportResults(dummyJob,'JSON',testFilename, exportFunctions)
 
     const filename = testFilename.concat('.json')
 
@@ -94,6 +112,14 @@ describe('exporting to JSON', () => {
         })
 
     })
+
+    test('returns the correct count of rows written', done => {
+    
+       rowsWritten.then(res => {
+            expect(res).toEqual(1) // Written as a single row
+            done()
+        })
+    })
   
 })
 
@@ -101,7 +127,11 @@ describe('exporting to JSON', () => {
 describe('exporting to SQLite', () => {
 
     const DBfilename = testFilename.concat('.db')
-    writeResultsToSQLite({result: dummyJob.result, filename: DBfilename  })
+
+
+        
+    const rowsWritten = exportResults(dummyJob,'SQLite',testFilename, exportFunctions)
+
 
     test('creates a file', () => {        
         return fs.access( DBfilename , (e) => {
@@ -116,6 +146,12 @@ describe('exporting to SQLite', () => {
         const count = db.prepare(`SELECT COUNT(*) AS rowcount FROM result WHERE service='Azure'`) // Count of Azure related rows
 
         expect( count.get().rowcount ).toEqual(2)
+
+    })
+
+    test('returns the correct count of rows written', () => {
+        expect(rowsWritten).toEqual(4)
+
 
     })
 

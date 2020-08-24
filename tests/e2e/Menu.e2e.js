@@ -28,7 +28,6 @@ test('should navigate to configuration-page', async t => {
 
 test('should navigate to setup images-view', async t => {
     await t
-    .click(Selector('button').withExactText('Analyze'))
     .click(Selector('a').withExactText('1. Setup images for analysis'))
     .expect(getPageUrl())
     .contains('/imagesetup')
