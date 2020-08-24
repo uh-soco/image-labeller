@@ -18,7 +18,7 @@
     },
     {  "name": "AWS",
         "options": [
-            {  "name": "API_ENDPOINT" , "displayName": "API-endpoint",   "value": "https://rekognition.us-east-1.amazonaws.com" }
+            {  "name": "API_ENDPOINT" , "displayName": "API-endpoint",   "value": "/tag/aws" } 
             ,{ "name": "ACCESS_KEY_ID", "displayName": "access key ID", "value": "" }
             ,{ "name": "SECRET_ACCESS_KEY", "displayName": "secret access key", "value": "", "secret": true }
             

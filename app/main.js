@@ -1,7 +1,10 @@
 const { BrowserWindow, app, ipcMain, remote } = require('electron')
+
 const writeResultsToSQLite = require('./main-utils/writeResultsToSQLite')
 const writeRowsToFile      = require('./main-utils/writeRowsToFile');
 const getFile              = require('./main-utils/getFile')
+const signJsonWebToken     = require('./main-utils/signJsonWebToken')
+
 
 const getPathsFromTxt      = require('./utils/getPathsFromTxt')
 
@@ -74,4 +77,9 @@ ipcMain.handle('write-rows-to-file', (event, arg) => {
 // Listener for request read file
 ipcMain.handle('get-file', (event, arg) => {
   return getFile(arg)
+});
+
+// Listener for request read file
+ipcMain.handle('sign-jwt', (event, arg) => {
+  return signJsonWebToken(arg)
 });

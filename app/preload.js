@@ -15,7 +15,8 @@ process.once('loaded', () => {
       sendRowsToBeWrittenToSQLite: data => ipcRenderer.invoke('request-write-to-sqlite',data),
       getFile: data => ipcRenderer.invoke('get-file',data),
       getUrlAsBase64: url => getUrlAsBase64(url),
-      getFileAsBase64: data => ipcRenderer.invoke('get-file',data).then(d => Buffer.from(d , 'binary').toString('base64') )
+      getFileAsBase64: data => ipcRenderer.invoke('get-file',data).then(d => Buffer.from(d , 'binary').toString('base64') ),
+      signJsonWebToken: data => ipcRenderer.invoke('sign-jwt',data)
     }
   )
 })

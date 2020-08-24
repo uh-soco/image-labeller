@@ -311,13 +311,9 @@ class GoogleConfig extends ServiceConfiguration {
         }
 
         const parsedPrivateKey = '-----BEGIN PRIVATE KEY-----\n' + this.PRIVATE_KEY.replace(/\s+/g, '\n') + '\n-----END PRIVATE KEY-----'
-
-        const token = jwt.sign(
-            payload
-            , parsedPrivateKey
-            , { algorithm: 'RS256' }
-        )
-
+        
+        const token = window.api.signJsonWebToken({ payload, parsedPrivateKey})
+        
         return {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
