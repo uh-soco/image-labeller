@@ -296,7 +296,7 @@ class GoogleConfig extends ServiceConfiguration {
         super(configuration, path)
     }
 
-    getHeaders = () => {
+    getHeaders = async ()  => {
 
         const iat = Math.floor(Date.now() / 1000)
         const exp = iat + 3600
@@ -312,7 +312,7 @@ class GoogleConfig extends ServiceConfiguration {
 
         const parsedPrivateKey = '-----BEGIN PRIVATE KEY-----\n' + this.PRIVATE_KEY.replace(/\s+/g, '\n') + '\n-----END PRIVATE KEY-----'
         
-        const token = window.api.signJsonWebToken({ payload, parsedPrivateKey})
+        const token = await window.api.signJsonWebToken({ payload, parsedPrivateKey})
         
         return {
             'Authorization': `Bearer ${token}`,
@@ -343,7 +343,7 @@ class GoogleConfig extends ServiceConfiguration {
 
 
         if (this.imgPath.type === 'localPath') {
-            
+
             body.requests[0].image = { content: window.api.getFileAsBase64(this.imgPath.path) }
 
         }
