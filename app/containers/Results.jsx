@@ -1,6 +1,8 @@
 import React from 'react'
 
 import ResultCrosstabulation from '../components/ResultCrosstabulation'
+import WordCloud from '../components/WordCloud'
+import TagList from '../components/TagList'
 
 import { useSelector  } from 'react-redux'
 
@@ -19,6 +21,8 @@ const Results = () => {
         <Container>
             <Export job={job}  />
             <ResultCrosstabulation job={job} />
+            <WordCloud job={job} />
+            <TagList job={job} />
         
         </Container>
     )

@@ -83,7 +83,7 @@ const Listing = ({ onListUpdate, listItems }) => {
               </td>
               <td></td>
               <td>
-                <Button variat='error' id='deleteAll' onClick={handleDeleteAll}>Delete all</Button>
+                <Button variant='error' id='deleteAll' onClick={handleDeleteAll}>Delete all</Button>
               </td>  
               <InfoModal hide={hideModal} show={showRemoveAllModal}  title={modalTitle} body={modalBody}/> 
           </tr>

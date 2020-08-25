@@ -16,10 +16,11 @@ const sendImages = (pathlist, servicesToSendTo, configuration) => {
     
     return Promise.all(promises).then(values => {
         const result = values.flat() // values is a nested array: each service is it's own array
+        const sortedResult = result.sort((result1, result2) => (result1.accuracy > result2.accuracy) ? -1 : 1)
 
-        console.log(result)
+        console.log(sortedResult)
 
-        return result
+        return sortedResult
     })
     
 
