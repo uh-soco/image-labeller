@@ -286,7 +286,7 @@ class AWSconfig extends ServiceConfiguration {
         }
         
 
-        return (response) => {
+        return response => {
             return response.data.Labels.map(manipulateTag)            
         }
     }
@@ -315,7 +315,15 @@ class GoogleConfig extends ServiceConfiguration {
 
         const parsedPrivateKey = '-----BEGIN PRIVATE KEY-----\n' + this.PRIVATE_KEY.replace(/\s+/g, '\n') + '\n-----END PRIVATE KEY-----'
         
-        const token = await window.api.signJsonWebToken({ payload, parsedPrivateKey})
+        let token
+        // Prevent from trying to sign the token without real data
+        if (  this.PRIVATE_KEY !== ''  ) {
+          
+            token = await window.api.signJsonWebToken({ payload, parsedPrivateKey})
+            
+        }
+
+    
         
         return {
             'Authorization': `Bearer ${token}`,
@@ -323,7 +331,7 @@ class GoogleConfig extends ServiceConfiguration {
         }
     }
 
-    getBody = () => {
+    getBody = async () => {
 
         const body = {
             requests: [
@@ -347,7 +355,7 @@ class GoogleConfig extends ServiceConfiguration {
 
         if (this.imgPath.type === 'localPath') {
 
-            body.requests[0].image = { content: window.api.getFileAsBase64(this.imgPath.path) }
+            body.requests[0].image = { content: await window.api.getFileAsBase64(this.imgPath.path) }
 
         }
 
@@ -379,8 +387,7 @@ class GoogleConfig extends ServiceConfiguration {
             }
         )
 
-        return (response) => {
-            console.log('response', response)
+        return response => {
             return response.data.responses[0].labelAnnotations.map(manipulateTag)
         }
     }

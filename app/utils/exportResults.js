@@ -7,14 +7,17 @@ const makeRowForCSV = result => {
 }
 
 const createJSON = result => {
-    
-  const json = [JSON.stringify({ 'id': result.id, 'service': result.service, 'label': result.label, 'accuracy': result.accuracy, 'type': result.type, 'path': result.path, ts: getTimestamp() })]
 
-  return [json] // WriteRowsToFile expects an array
+  const singleResultAsObject = result =>  { return({ 'id': result.id, 'service': result.service, 'label': result.label, 'accuracy': result.accuracy, 'type': result.type, 'path': result.path, ts: getTimestamp() }) }
+    
+  const json = JSON.stringify( { result: result.map(singleResultAsObject)  })  
+
+  
+  return [json]// WriteRowsToFile expects an array, written as a single row
 }
 
 
-const exportResults = (job, formatToExportTo, file='export') => {
+const exportResults = (job, formatToExportTo, file='export', exportFunctions=window.api ) => {
 
   const filename = file.concat('.').concat( formatToExportTo === 'SQLite' ? 'db' : formatToExportTo.toLowerCase() )
 
@@ -31,7 +34,7 @@ const exportResults = (job, formatToExportTo, file='export') => {
 
     // Main process has listener for action 'request-write-to-sqlite'
     // See preload.js
-    return window.api.sendRowsToBeWrittenToSQLite(data)
+    return exportFunctions.sendRowsToBeWrittenToSQLite(data)
 
   } 
   
@@ -39,7 +42,7 @@ const exportResults = (job, formatToExportTo, file='export') => {
 
   const rows = formatToExportTo === 'CSV' ? job.result.map(makeRowForCSV) : createJSON(job.result)
   // see preload.js
-  return window.api.sendRowsToBeWrittenToFile({ rows: rows, filename: filename })
+  return exportFunctions.sendRowsToBeWrittenToFile({ rows: rows, filename: filename })
 
 }
 
