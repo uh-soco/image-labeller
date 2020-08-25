@@ -314,9 +314,10 @@ class GoogleConfig extends ServiceConfiguration {
         
         let token
         // Prevent from trying to sign the token without real data
-        if ( !(['development','test'].find(env => env === process.env.NODE_ENV))  ) {
-
+        if (  this.PRIVATE_KEY !== ''  ) {
+          
             token = await window.api.signJsonWebToken({ payload, parsedPrivateKey})
+            
         }
 
     
@@ -327,7 +328,7 @@ class GoogleConfig extends ServiceConfiguration {
         }
     }
 
-    getBody = () => {
+    getBody = async () => {
 
         const body = {
             requests: [
@@ -351,7 +352,7 @@ class GoogleConfig extends ServiceConfiguration {
 
         if (this.imgPath.type === 'localPath') {
 
-            body.requests[0].image = { content: window.api.getFileAsBase64(this.imgPath.path) }
+            body.requests[0].image = { content: await window.api.getFileAsBase64(this.imgPath.path) }
 
         }
 
