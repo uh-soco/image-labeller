@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Table } from 'react-bootstrap'
 
 const ResultCrosstabulation = ({ job }) => {
     
@@ -21,7 +21,7 @@ const ResultCrosstabulation = ({ job }) => {
   // parameters are names (service1, service2)
   const similarity = (s1, s2) => {
     if (s1 === s2) {
-        return '🐌'
+        return '🦆'
     }
 
     // Collect tags per service
@@ -38,17 +38,23 @@ const ResultCrosstabulation = ({ job }) => {
     return accuracy.toFixed(2)
   }
 
+  const tablestyle = {
+    backgroundColor: 'whitesmoke',
+    color: 'black'
+}
+
   return (
   
     <div>
-      <table>
+      <p><strong>Tag Similarity</strong></p>
+      <Table style={tablestyle} size="sm" striped bordered hover>
         <thead>
             <tr>
                 <th></th>
                 {
                     services.map(service => {
                         return (
-                            <th key={service}>{service}</th>
+                            <th key={service} class='text-center'>{service}</th>
                         )
                     })
                 }
@@ -60,11 +66,11 @@ const ResultCrosstabulation = ({ job }) => {
             services.map(name1 => {
               return (
                 <tr key={name1}>
-                  <td>{name1}</td>
+                  <td><strong>{name1}</strong></td>
                   {
                     services.map(name2 => {
                         return (
-                            <td key={name1 + name2}>{similarity(name1, name2)}</td>
+                            <td key={name1 + name2} align='center'>{similarity(name1, name2)}</td>
                         )
                     })
                   }
@@ -73,7 +79,7 @@ const ResultCrosstabulation = ({ job }) => {
             })
           }
         </tbody>
-      </table>
+      </Table>
     </div>
   )
 }

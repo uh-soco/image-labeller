@@ -8,8 +8,6 @@ const Export = ({ job })  => {
 
   const exportFormats = ['CSV','SQLite','JSON']
 
-
-
   const [showExportChoice, setShowExportChoice] = useState(false)
   const [exportingStatus , setExportingStatus]  = useState('pre')
   
@@ -37,11 +35,8 @@ const Export = ({ job })  => {
       setModalTitle(`Schrieb ${res} Reihen`)
       setExportingStatus('post')
     })
-    
       
   }
-
-
 
   const modalbody =  
     <div>
@@ -56,19 +51,12 @@ const Export = ({ job })  => {
         }
     </div>
 
-  
-
-
-  
-
   return(
     <div>
-        <Button variant="primary" onClick={handleClickExport}>Export tags</Button>
+        <Button style={{margin:'0 0 0 10px'}} variant="primary" onClick={handleClickExport}>Export tags</Button>
         <InfoModal show={showExportChoice} hide={handleClose} title={modalTitle} body={modalbody}/>
     </div>
   )
-
 }
-
 
 export default Export

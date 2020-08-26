@@ -35,7 +35,7 @@ const WordCloud = ({ job }) => {
 
 
     return (
-        <div className={styles.rows} style={{ height: 500, width: 1000 }}>
+        <div>
             <Container>
                 <Row>
                 {

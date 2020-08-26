@@ -3,11 +3,10 @@ import React from 'react'
 import ResultCrosstabulation from '../components/ResultCrosstabulation'
 import WordCloud from '../components/WordCloud'
 import TagList from '../components/TagList'
+import Export from '../components/Export'
 
 import { useSelector  } from 'react-redux'
-
-import { Container } from 'react-bootstrap'
-import Export from '../components/Export'
+import { Container, Row} from 'react-bootstrap'
   
 const Results = () => {
 
@@ -18,12 +17,13 @@ const Results = () => {
     }
 
     return(
-        <Container>
-            <Export job={job}  />
-            <ResultCrosstabulation job={job} />
+        <Container> 
+            <Row>          
+                <ResultCrosstabulation job={job} />
+                <Export job={job}  />
+            </Row>
             <WordCloud job={job} />
-            <TagList job={job} />
-        
+            <TagList job={job} />                   
         </Container>
     )
 }
