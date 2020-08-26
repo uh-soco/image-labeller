@@ -1,0 +1,36 @@
+name: Pipeline
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  build:
+    name: Test
+    runs-on: ubuntu-18.04
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+
+      - name: Install dependencies
+        run: |
+             npm install
+             cd app
+             npm install
+             npm run electron-rebuild
+             cd ..
+             npm run postinstall
+             
+      - name: Run build
+        run: npm run build
+
+      - name: Run tests
+        uses: GabrielBB/xvfb-action@v1.2
+        with:
+          run: npm run test
