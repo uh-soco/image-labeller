@@ -91,7 +91,7 @@ const SetupServices = () => {
 
       <Row>
         <p>
-          Ready to analyze { pathlist.length } images. Choose services which are used for image labelling.
+          Ready to analyze { pathlist.length } images. Choose services to use for image labelling.
         </p>
       </Row>
       <Row>

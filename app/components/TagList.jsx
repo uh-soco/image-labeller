@@ -26,6 +26,11 @@ const TagList = ({ job }) => {
         setShown(current + howmany)
     }
 
+    const buttonStyle = {
+        backgroundColor: '#079992',
+        color: 'white'
+    }
+
     return (
         <div>
             <Table style={tablestyle} size="sm" striped bordered hover>
@@ -53,7 +58,7 @@ const TagList = ({ job }) => {
                         }
                 </tbody>
             </Table>
-            <Button variant="primary" id='showMore' onClick={() => handleShowMore(10)}>show 10 more</Button>
+            <Button style={buttonStyle} id='showMore' onClick={() => handleShowMore(10)}>show 10 more</Button>
         </div>
     )
 

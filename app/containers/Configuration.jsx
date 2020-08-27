@@ -50,6 +50,17 @@ const Configuration = (  ) => {
     }
     return ''
   }
+  
+  const selectedButtonStyle = {
+    backgroundColor: '#079992',
+    color: 'white'
+  }
+
+
+  const unselectedButtonStyle = {
+    backgroundColor: '#3c6382',
+    color: 'white'
+  }
 
   return(
     <Container>
@@ -59,11 +70,11 @@ const Configuration = (  ) => {
         {
           services.map(service => {
 
-            const variant = service.name === SERVICE ? 'success' : 'primary'
+            const buttonStyle = service.name === SERVICE ? selectedButtonStyle : unselectedButtonStyle
 
             return (
               <div key={service.name} style={{ margin: '5px' }}>
-                <Button  variant={variant}  onClick={() => setSERVICE(service.name)}>
+                <Button style={buttonStyle} onClick={() => setSERVICE(service.name)}>
                   { service.name }
                 </Button>  
               </div>

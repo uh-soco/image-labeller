@@ -54,7 +54,7 @@ const ResultCrosstabulation = ({ job }) => {
                 {
                     services.map(service => {
                         return (
-                            <th key={service} class='text-center'>{service}</th>
+                            <th key={service} className='text-center'>{service}</th>
                         )
                     })
                 }

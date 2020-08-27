@@ -18,6 +18,7 @@ const Menu = () => {
 
 
   const menuStyle = {
+    backgroundColor: '#3c6382',
     marginBottom: '2%'
   }
 
@@ -34,6 +35,18 @@ const Menu = () => {
 
 
 
+  const selectedButtonStyle = {
+    backgroundColor: '#82ccdd',
+    color: 'white'
+  }
+
+
+  const unselectedButtonStyle = {
+    backgroundColor: '#60a3bc',
+    color: 'white'
+  }
+
+  
 
   const changePage = (e,r) => {
     setView(r)
@@ -44,13 +57,12 @@ const Menu = () => {
 
 
   return(
-    <Navbar style={menuStyle} bg="primary" variant="light">
+    <Navbar style={menuStyle} variant="light">
       
           <ButtonGroup>
             {
               menuButtons.map(b => {
-
-                const variant = b.route === view ? 'warning' : 'success'
+                const buttonStyle = b.route === view? selectedButtonStyle : unselectedButtonStyle
               
                 /*
                   Note: Clicking Link-element will change the page by default.
@@ -59,8 +71,8 @@ const Menu = () => {
               
                 return(
                     <Button
+                      style={buttonStyle}
                       key={b.text}
-                      variant={variant}
                       onClickCapture={(e) => changePage(e,b.route)}
                     >
                     <Link ref={ref} style={navBarLinkStyle} to={b.route}>{ b.text }</Link>              

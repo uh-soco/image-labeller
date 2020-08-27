@@ -38,22 +38,33 @@ const Export = ({ job })  => {
       
   }
 
+  const buttonStyle = {
+    backgroundColor: '#079992',
+    color: 'white',
+    margin:'0 0 0 10px'
+  }
+
+  const exportButtonStyle = {
+    backgroundColor: '#38ada9',
+    color: 'white'
+  }
+
   const modalbody =  
     <div>
         {
           exportingStatus === 'cur' ? <Spinner animation="border" role="status" /> : ''
         }
         {
-          exportingStatus === 'post' ? <Button variant="primary" onClick={handleClose}>Gut!</Button> : ''
+          exportingStatus === 'post' ? <Button style={exportButtonStyle} onClick={handleClose}>Gut!</Button> : ''
         }
         {
-          exportingStatus === 'pre' ? exportFormats.map(format =>  <Button variant="primary" key={format} onClick={() => chooseFormatAndExport(format) }>{ format }</Button>) : ''
+          exportingStatus === 'pre' ? exportFormats.map(format =>  <Button style={exportButtonStyle} key={format} onClick={() => chooseFormatAndExport(format) }>{ format }</Button>) : ''
         }
     </div>
 
   return(
     <div>
-        <Button style={{margin:'0 0 0 10px'}} variant="primary" onClick={handleClickExport}>Export tags</Button>
+        <Button style={buttonStyle} variant="primary" onClick={handleClickExport}>Export tags</Button>
         <InfoModal show={showExportChoice} hide={handleClose} title={modalTitle} body={modalbody}/>
     </div>
   )

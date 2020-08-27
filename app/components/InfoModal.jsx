@@ -6,7 +6,7 @@ const InfoModal = ({show, hide, title, body}) => {
 
     const titleStyle = {
         color: "black",
-        fontFamily: 'Arial'
+        fontFamily: 'Georgia'
     }
 
     return(

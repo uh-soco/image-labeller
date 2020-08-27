@@ -38,7 +38,7 @@ class ServiceConfiguration {
 class AzureConfig extends ServiceConfiguration {
 
     constructor(configuration,path) {
-        super(configuration,path)
+       super(configuration,path)
     }
 
     getHeaders = () => {
@@ -337,7 +337,7 @@ class GoogleConfig extends ServiceConfiguration {
         if (this.imgPath.type === 'localPath') {
             base64Img = await window.api.getFileAsBase64(this.imgPath.path)
         } else {
-            base64Img = await getUrlAsBase64(this.imgPath.path)
+            base64Img = await window.api.getUrlAsBase64(this.imgPath.path)
         }
 
         const body = {
