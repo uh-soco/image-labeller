@@ -1,35 +1,34 @@
 [
     {  "name": "Azure",
         "options": [
-            {  "name": "API_ENDPOINT" , "displayName": "API-endpoint",   "value": "/tag/azure" }
-            ,{ "name": "API_URL_QUERY", "displayName": "URL-query",  "value": "/vision/v2.1/analyze?visualFeatures=Tags&language=en" }
-            ,{ "name": "API_KEY", "displayName": "API-Key", "value": "", "secret": true }
-            
+            {  "name": "API_ENDPOINT" , "displayName": "Endpoint",  "value": "https://image-rec-free.cognitiveservices.azure.com/" }
+            ,{ "name": "API_URL_QUERY", "displayName": "Query",     "value": "vision/v2.1/analyze?visualFeatures=Tags&language=en" }
+            ,{ "name": "API_KEY",       "displayName": "Key",       "value": "", "secret": true }
+   
         ]
     },
     { 
         "name": "IBM",
         "options": [
-            { "name": "API_INSTANCE",   "displayName": "Instance"     , "value": "/tag/ibm" }
-            ,{ "name": "API_URL_QUERY", "displayName": "URL-query"    , "value": "/v3/classify?version=2018-03-19" }
-            ,{ "name": "API_URL_BASE",  "displayName": "Base-url"     , "value": "https://api.eu-de.visual-recognition.watson.cloud.ibm.com/instances/" }
-            ,{ "name": "API_KEY", "displayName": "API-Key", "value": "", "secret": true }
+            {  "name": "API_URL_BASE",  "displayName": "URL",      "value": "" }
+            ,{ "name": "API_URL_QUERY", "displayName": "Query",    "value": "/v3/classify?version=2018-03-19" }
+            ,{ "name": "API_KEY",       "displayName": "API Key",  "value": "", "secret": true }
        ]
     },
     {  "name": "AWS",
         "options": [
-            {  "name": "API_ENDPOINT" , "displayName": "API-endpoint",   "value": "/tag/aws" } 
-            ,{ "name": "ACCESS_KEY_ID", "displayName": "access key ID", "value": "" }
-            ,{ "name": "SECRET_ACCESS_KEY", "displayName": "secret access key", "value": "", "secret": true }
+            {  "name": "API_ENDPOINT" ,     "displayName": "Endpoint",          "value": "https://rekognition.eu-central-1.amazonaws.com" } 
+            ,{ "name": "ACCESS_KEY_ID",     "displayName": "Access Key ID",     "value": "" }
+            ,{ "name": "SECRET_ACCESS_KEY", "displayName": "Secret Access Key", "value": "", "secret": true }
             
         ]
     },
     {  "name": "Google",
         "options": [
-            {  "name": "API_ENDPOINT" , "displayName": "API Endpoint",   "value": "/tag/google" }
-            ,{ "name": "API_URL_QUERY", "displayName": "URL Query",  "value": "/v1/images:annotate" }
-            ,{ "name": "PRIVATE_KEY", "displayName": "Private Key", "value": "", "secret": true }
-            ,{ "name": "CLIENT_EMAIL", "displayName": "Client Email", "value": "", "secret": true }
+            {  "name": "API_ENDPOINT" , "displayName": "Endpoint",      "value": "https://vision.googleapis.com/" }
+            ,{ "name": "API_URL_QUERY", "displayName": "Query",         "value": "v1/images:annotate" }
+            ,{ "name": "PRIVATE_KEY",   "displayName": "Private Key",   "value": "", "secret": true }
+            ,{ "name": "CLIENT_EMAIL",  "displayName": "Client Email",  "value": "", "secret": true }
 
         ]
     }
