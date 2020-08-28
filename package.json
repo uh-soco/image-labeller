@@ -1,7 +1,7 @@
 {
-  "name": "osaisipa_confeja",
-  "version": "0.0.1",
-  "description": "ihan_itse_tein",
+  "name": "duck-duck-tag",
+  "version": "0.1.0",
+  "description": "Tool for using multiple image recognition services ",
   "author": "duck-duck-tag",
   "license": "MIT",
   "scripts": {
@@ -66,7 +66,6 @@
         "runner": "@jest-runner/electron/main",
         "testEnvironment": "node",
         "testMatch": [
-          
           "<rootDir>/tests/native/exportResults.native.test.js"
         ],
         "moduleDirectories": [

@@ -9,6 +9,8 @@
     "electron-rebuild": "../node_modules/.bin/electron-rebuild --parallel --force --types prod,dev --module-dir ."
   },
   "dependencies": {
-    "better-sqlite3": "^7.1.0"
+    "axios": "^0.20.0",
+    "better-sqlite3": "^7.1.0",
+    "jsonwebtoken": "^8.5.1"
   }
 }
