@@ -137,7 +137,7 @@ class IBMconfig extends ServiceConfiguration {
 
     getURL = () => {
         if (this.imgPath.type === 'url' || this.imgPath.type === 'localPath') {
-            return (  process.env.NODE_ENV === 'development' ? '' : this.API_URL_BASE) + this.API_INSTANCE + this.API_URL_QUERY
+            return (  process.env.NODE_ENV === 'development' ? '' : this.API_URL_BASE) + this.API_URL_QUERY
         }
     }
 
