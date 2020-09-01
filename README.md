@@ -13,8 +13,8 @@ The application is being built on the specification and requirement provided by 
 
 - [Implementation](#implementation)
 - [Running the app locally](#running-the-app-locally)
-- [Usage](#usage)
-- [Documentation](documentation/general_overview.md)
+- [Documentation](#documentation)
+- [Project Documents](#project-documents)
 - [License](LICENSE.md)
 
 ## Implementation
@@ -35,6 +35,12 @@ npm run dev
 ```
 
 ## Documentation
+
+- [General Overview](documentation/general_overview.md)
+- [User Guide](documentation/user_guide.md)
+- [About Services](documentation/about_services.md)
+
+## Project documents
 
 - [Definition of done](https://github.com/duck-duck-tag/duck-duck-tag/blob/master/DefinitionOfDone.md)
 - [Product backlog](https://docs.google.com/spreadsheets/d/1ypMfZBOHwcXqzx_ehelTg8syBYQba85UtAmK6r7JvH8/edit?usp=sharing)
