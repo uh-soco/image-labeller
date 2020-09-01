@@ -15,7 +15,7 @@ The application is being built on the specification and requirement provided by 
 - [Running the app locally](#running-the-app-locally)
 - [Usage](#usage)
 - [Documentation](documentation/general_overview.md)
-- [License](#license)
+- [License](LICENSE.md)
 
 ## Implementation
 
@@ -27,11 +27,12 @@ Requirements: [NPM](https://www.npmjs.com)
 
 ```bash
 git clone https://github.com/duck-duck-tag/novelty-boilerplate
-cd novelty-boilerplate
-npm install
+cd novelty-boilerplate && npm install
+cd app/ && npm install && npm run electron-rebuild
+
+cd ../ && npm run postinstall
 npm run dev
 ```
-
 
 ## Documentation
 
@@ -40,7 +41,7 @@ npm run dev
 - [Hour accounting](https://docs.google.com/spreadsheets/d/1ypMfZBOHwcXqzx_ehelTg8syBYQba85UtAmK6r7JvH8/edit#gid=1685552279)
 - [Sprint task board](https://github.com/duck-duck-tag/duck-duck-tag/projects)
 
-**Communication is mainly managed through the medium of**
+**Communication was mainly managed through the medium of**
 
 - [Discord App](https://discord.com/)
 
