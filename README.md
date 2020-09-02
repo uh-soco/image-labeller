@@ -1,13 +1,16 @@
-# Duck-duck-tag :baby_chick:
+# duck-duck-tag :baby_chick:
 [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![Pipeline](https://github.com/duck-duck-tag/duck-duck-tag/workflows/Pipeline/badge.svg)
 
 
 
-or **Tools for automated image analysis** in social sciences shall hatch into a researcher-friendly desktop application. This application will allow sending images for tagging via multiple image recognition services, for example IBM Watson and Microsoft Azure. When the image recognition process is complete, the application shows tags and their accuracy. You can also export the data in CSV, JSON, and SQLite format. 
+or **Tools for automated image analysis** in social sciences has hatched into a researcher-friendly desktop application. This application allows sending images for tagging via multiple image recognition services, for example IBM Watson and Microsoft Azure. When the image recognition process is complete, the application shows tags and their accuracies. You can also export the data in CSV, JSON, and SQLite format. 
 
-The application is being built on the specification and requirement provided by Matti Nelimarkka from the University of Helsinki. Here is a link to the client's blog post about the issue [in Finnish](https://rajapinta.co/2020/02/24/onko-maailma-erilainen-riippuen-siita-kenen-tekoaly-sita-katselee/)
+The application was built on the specification and requirement provided by Matti Nelimarkka from the University of Helsinki. Here is a link to the client's blog post about the issue [in Finnish](https://rajapinta.co/2020/02/24/onko-maailma-erilainen-riippuen-siita-kenen-tekoaly-sita-katselee/)
+
+The work started on top of an existing [boilerplate](https://github.com/electron-react-boilerplate/electron-react-boilerplate), and a lot of the functionality was first built in [another repository](https://github.com/duck-duck-tag/duck-duck-tag) under this organization. Later, we built our own boilerplate, moved the functionality from the other repository and continued the work here.
+
 
 ## Table of Contents
 
