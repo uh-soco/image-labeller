@@ -9,12 +9,6 @@ It might be good to mention that the working configurations are for the most par
 - Automatically returns all tags
 - Parent terms are not implemented
 
-## [IBM Watson Visual Recognition](https://cloud.ibm.com/apidocs/visual-recognition/visual-recognition-v3)
-- Local images are sent with the request body, urls with request parameters
-- Authentication is made following the instructions in the [documentation](https://cloud.ibm.com/docs/account?topic=account-iamapikeysforservices)
-- The confidence threshold is specified in the request parameters
-- Parent terms are not implemented
-
 ## [Amazon Rekognition](https://docs.aws.amazon.com/general/latest/gr/signing_aws_api_requests.html)
 - Both local images and URLs are sent in the request body in the same format (base64 string).
 - Authentication is made following the [Signature Version 4 signing process](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).

@@ -5,7 +5,7 @@
 
 
 
-or **Tools for automated image analysis** in social sciences has hatched into a researcher-friendly desktop application. This application allows sending images for tagging via multiple image recognition services, for example IBM Watson and Microsoft Azure. When the image recognition process is complete, the application shows tags and their accuracies. You can also export the data in CSV, JSON, and SQLite format. 
+or **Tools for automated image analysis** in social sciences has hatched into a researcher-friendly desktop application. This application allows sending images for tagging via multiple image recognition services, for example Google Vision and Microsoft Azure. When the image recognition process is complete, the application shows tags and their accuracies. You can also export the data in CSV, JSON, and SQLite format. 
 
 The application was built on the specification and requirement provided by Matti Nelimarkka from the University of Helsinki. Here is a link to the client's blog post about the issue [in Finnish](https://rajapinta.co/2020/02/24/onko-maailma-erilainen-riippuen-siita-kenen-tekoaly-sita-katselee/)
 

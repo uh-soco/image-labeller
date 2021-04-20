@@ -1,35 +1,71 @@
 [
-    {  "name": "Azure",
+    {
+        "name": "Azure",
         "options": [
-            {  "name": "API_ENDPOINT" , "displayName": "Endpoint",  "value": "https://image-rec-free.cognitiveservices.azure.com/" }
-            ,{ "name": "API_URL_QUERY", "displayName": "Query",     "value": "vision/v2.1/analyze?visualFeatures=Tags&language=en" }
-            ,{ "name": "API_KEY",       "displayName": "Key",       "value": "", "secret": true }
-   
+            {
+                "name": "API_ENDPOINT",
+                "displayName": "Endpoint",
+                "value": "https://image-rec-free.cognitiveservices.azure.com/"
+            },
+            {
+                "name": "API_URL_QUERY",
+                "displayName": "Query",
+                "value": "vision/v2.1/analyze?visualFeatures=Tags&language=en"
+            },
+            {
+                "name": "API_KEY",
+                "displayName": "Key",
+                "value": "",
+                "secret": true
+            }
         ]
     },
-    { 
-        "name": "IBM",
+    {
+        "name": "AWS",
         "options": [
-            {  "name": "API_URL_BASE",  "displayName": "URL",      "value": "" }
-            ,{ "name": "API_URL_QUERY", "displayName": "Query",    "value": "/v3/classify?version=2018-03-19" }
-            ,{ "name": "API_KEY",       "displayName": "API Key",  "value": "", "secret": true }
-       ]
-    },
-    {  "name": "AWS",
-        "options": [
-            {  "name": "API_ENDPOINT" ,     "displayName": "Endpoint",          "value": "https://rekognition.eu-central-1.amazonaws.com" } 
-            ,{ "name": "ACCESS_KEY_ID",     "displayName": "Access Key ID",     "value": "" }
-            ,{ "name": "SECRET_ACCESS_KEY", "displayName": "Secret Access Key", "value": "", "secret": true }
-            
+            {
+                "name": "API_ENDPOINT",
+                "displayName": "Endpoint",
+                "value": "https://rekognition.eu-central-1.amazonaws.com"
+            },
+            {
+                "name": "ACCESS_KEY_ID",
+                "displayName": "Access Key ID",
+                "value": ""
+            },
+            {
+                "name": "SECRET_ACCESS_KEY",
+                "displayName": "Secret Access Key",
+                "value": "",
+                "secret": true
+            }
         ]
     },
-    {  "name": "Google",
+    {
+        "name": "Google",
         "options": [
-            {  "name": "API_ENDPOINT" , "displayName": "Endpoint",      "value": "https://vision.googleapis.com/" }
-            ,{ "name": "API_URL_QUERY", "displayName": "Query",         "value": "v1/images:annotate" }
-            ,{ "name": "PRIVATE_KEY",   "displayName": "Private Key",   "value": "", "secret": true }
-            ,{ "name": "CLIENT_EMAIL",  "displayName": "Client Email",  "value": "", "secret": true }
-
+            {
+                "name": "API_ENDPOINT",
+                "displayName": "Endpoint",
+                "value": "https://vision.googleapis.com/"
+            },
+            {
+                "name": "API_URL_QUERY",
+                "displayName": "Query",
+                "value": "v1/images:annotate"
+            },
+            {
+                "name": "PRIVATE_KEY",
+                "displayName": "Private Key",
+                "value": "",
+                "secret": true
+            },
+            {
+                "name": "CLIENT_EMAIL",
+                "displayName": "Client Email",
+                "value": "",
+                "secret": true
+            }
         ]
     }
-] 
+]
