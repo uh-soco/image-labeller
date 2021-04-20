@@ -12,16 +12,16 @@ class ServiceConfiguration {
 
 
 
-    constructor(configuration,path) {
+    constructor(configuration, path) {
         this.name = configuration.name
 
         // Store all options as properties of "this"
         // Options are referenced like this: THIS.API_KEY
         configuration.options.forEach(opt => {
             this[opt.name] = opt.value
-         })
+        })
 
-        
+
         this.imgPath = path
     }
 
@@ -37,14 +37,14 @@ class ServiceConfiguration {
 
 class AzureConfig extends ServiceConfiguration {
 
-    constructor(configuration,path) {
-       super(configuration,path)
+    constructor(configuration, path) {
+        super(configuration, path)
     }
 
     getHeaders = () => {
         return {
-                'Ocp-Apim-Subscription-Key': this.API_KEY,
-                'Content-Type': this.imgPath.type === 'url'  ?  'application/json' : 'application/octet-stream'
+            'Ocp-Apim-Subscription-Key': this.API_KEY,
+            'Content-Type': this.imgPath.type === 'url' ? 'application/json' : 'application/octet-stream'
         }
     }
 
@@ -63,10 +63,10 @@ class AzureConfig extends ServiceConfiguration {
         }
         if (this.imgPath.type === 'localPath') {
             const file = window.api.getFile(this.imgPath.path)
-            console.log('file',file)
+            console.log('file', file)
             return file
         }
-   
+
     }
 
     getHandleResponse = () => {
@@ -91,89 +91,15 @@ class AzureConfig extends ServiceConfiguration {
 
 }
 
-class IBMconfig extends ServiceConfiguration {
-
-    constructor(configuration,path) {
-        super(configuration,path)
-    }
-
-    getHeaders = () => {
-        const apikey = btoa(`apikey:${this.API_KEY}`)
-
-        return {
-                'Authorization': `Basic ${apikey}`,
-                'Content-Type': this.imgPath.type === 'url' ? 'application/json' : 'application/octet-stream' 
-            
-        }
-    }
-
-    getBody = () => {
-            if (this.imgPath.type === 'localPath') {
-                const file = window.api.getFile(this.imgPath.path)
-                return file
-            }
-
-            if (this.imgPath.type === 'url') {
-                return {}
-            }
-    }
-
-
-    getParams = () => {
-        if (this.imgPath.type === 'url') {
-            return {
-                url: this.imgPath.path,
-                threshold: '0.0'
-            }
-        }
-
-        if (this.imgPath.type === 'localPath') {
-            return {
-                threshold: '0.0'
-            }
-        }
-    }
-
-
-    getURL = () => {
-        if (this.imgPath.type === 'url' || this.imgPath.type === 'localPath') {
-            return (  this.API_URL_BASE + this.API_URL_QUERY )
-        }
-    }
-
-    getHandleResponse = () => {
-
-        const manipulateTag = (tag) => (
-            {
-                path: this.imgPath.path,
-                type: this.imgPath.type,
-                service: this.name,
-                label: tag.class.toLowerCase(),
-                accuracy: tag.score,
-                id: getId(),
-                time: this.getTimestamp(),
-                parents: []
-            }
-        )
-        
-
-        return (response) => {
-        
-            return response.data.images.find(obj => Object.keys(obj).includes('classifiers') ).classifiers[0].classes.map(manipulateTag)
-            
-        }
-    }
-
-}
 
 class AWSconfig extends ServiceConfiguration {
 
-    constructor(configuration,path) {
-        super(configuration,path)
+    constructor(configuration, path) {
+        super(configuration, path)
     }
 
     getHeaders = async () => {
-        
+
         const body = await this.getBody()
 
         const requestPayload = JSON.stringify(body)
@@ -186,21 +112,21 @@ class AWSconfig extends ServiceConfiguration {
         const region = 'eu-central-1'
         const host = 'rekognition.' + region + '.amazonaws.com'
         const credentialScope = date + '/' + region + '/rekognition/aws4_request'
-        
+
         const signedHeaders = 'content-type;host;x-amz-date'
         const algorithm = 'AWS4-HMAC-SHA256'
 
-        const canonicalRequest = 
+        const canonicalRequest =
             'POST\n' +
             '/\n' +
             '\n' +
-            'content-type:' + contenttype + '\n' + 
-            'host:' + host + '\n' + 
+            'content-type:' + contenttype + '\n' +
+            'host:' + host + '\n' +
             'x-amz-date:' + amzdate + '\n\n' +
-            signedHeaders + '\n' + 
+            signedHeaders + '\n' +
             sha256(requestPayload).toString()
 
-        const string_to_sign = 
+        const string_to_sign =
             algorithm + '\n' +
             amzdate + '\n' +
             credentialScope + '\n' +
@@ -226,7 +152,7 @@ class AWSconfig extends ServiceConfiguration {
         }
 
     }
-            
+
 
     getBody = async () => {
         let body = {
@@ -237,8 +163,8 @@ class AWSconfig extends ServiceConfiguration {
         }
 
         if (this.imgPath.type === 'localPath') {
-    
-            const image =  window.api.getFileAsBase64(this.imgPath.path)
+
+            const image = window.api.getFileAsBase64(this.imgPath.path)
 
             body.Image.Bytes = await image
 
@@ -246,13 +172,13 @@ class AWSconfig extends ServiceConfiguration {
 
         } else {
             const promise = window.api.getUrlAsBase64(this.imgPath.path)
-            
+
             const image = await promise
-            
+
             body.Image.Bytes = image
 
             return body
-            
+
         }
 
     }
@@ -267,27 +193,27 @@ class AWSconfig extends ServiceConfiguration {
 
     getURL = () => {
         return this.API_ENDPOINT
-        
+
     }
-    
+
     getHandleResponse = () => {
 
-        const manipulateTag = (tag) => {            
+        const manipulateTag = (tag) => {
             return {
                 path: this.imgPath.path,
                 type: this.imgPath.type,
                 service: this.name,
                 label: tag.Name.toLowerCase(),
-                accuracy: tag.Confidence/100,
+                accuracy: tag.Confidence / 100,
                 id: getId(),
                 time: this.getTimestamp(),
                 parents: tag.Parents.map(parent => parent.Name.toLowerCase())
             }
         }
-        
+
 
         return response => {
-            return response.data.Labels.map(manipulateTag)            
+            return response.data.Labels.map(manipulateTag)
         }
     }
 }
@@ -299,7 +225,7 @@ class GoogleConfig extends ServiceConfiguration {
         super(configuration, path)
     }
 
-    getHeaders = async ()  => {
+    getHeaders = async () => {
 
         const iat = Math.floor(Date.now() / 1000)
         const exp = iat + 3600
@@ -314,17 +240,17 @@ class GoogleConfig extends ServiceConfiguration {
         }
 
         const parsedPrivateKey = '-----BEGIN PRIVATE KEY-----\n' + this.PRIVATE_KEY.replace(/\s+/g, '\n') + '\n-----END PRIVATE KEY-----'
-        
+
         let token
         // Prevent from trying to sign the token without real data
-        if (  this.PRIVATE_KEY !== ''  ) {
-          
-            token = await window.api.signJsonWebToken({ payload, parsedPrivateKey})
-            
+        if (this.PRIVATE_KEY !== '') {
+
+            token = await window.api.signJsonWebToken({ payload, parsedPrivateKey })
+
         }
 
-    
-        
+
+
         return {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
@@ -389,31 +315,31 @@ class GoogleConfig extends ServiceConfiguration {
     }
 }
 
-export const createQuery = (config,path) => {
+export const createQuery = (config, path) => {
 
     let query
 
-    
+
     if (config.name === 'Azure') {
-        query = new AzureConfig( config, path )
+        query = new AzureConfig(config, path)
     }
 
     if (config.name === 'IBM') {
-        query = new IBMconfig( config, path )
+        query = new IBMconfig(config, path)
     }
 
     if (config.name === 'AWS') {
-        query = new AWSconfig( config, path )
+        query = new AWSconfig(config, path)
     }
 
 
     if (config.name === 'Google') {
         query = new GoogleConfig(config, path)
     }
-    
+
 
     return query
-} 
+}
 
 
 

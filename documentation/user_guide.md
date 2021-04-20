@@ -5,9 +5,6 @@ The credential field names indicate which credentials to fill in. The names corr
 ## Microsoft Azure Computer Vision
 - The user fills in the key. The endpoint is already filled in.
 
-## IBM Watson Visual Recognition
-- The user fills in the api key and the url. The query is already filled in.
-
 ## Amazon Rekognition
 - The user fills in the access key ID and the secret access key. The endpoint is already filled in.
 
